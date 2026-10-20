@@ -51,6 +51,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
+    margin: 5px;
   }
   .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
   .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102,126,234,0.4); }
@@ -59,7 +60,9 @@
   .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(235,51,73,0.4); }
   .btn-success { background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; }
   .btn-warning { background: linear-gradient(135deg, #f7971e, #ffd200); color: #fff; }
+  .btn-info { background: linear-gradient(135deg, #2193b0, #6dd5ed); color: #fff; }
   .btn-small { padding: 8px 16px; font-size: 13px; }
+  .btn-block { width: 100%; display: block; margin: 10px 0; }
 
   .info-bar {
     display: flex;
@@ -181,11 +184,12 @@
   .teacher-panel {
     background: #fff3cd;
     border: 2px solid #ffc107;
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
     margin-top: 20px;
   }
-  .teacher-panel h3 { color: #856404; margin-bottom: 10px; }
+  .teacher-panel h3 { color: #856404; margin-bottom: 15px; font-size: 20px; }
+  .teacher-panel p { margin-bottom: 10px; font-size: 15px; }
 
   .hidden { display: none !important; }
 
@@ -207,6 +211,39 @@
     color: #c62828;
   }
   .locked-message h2 { margin-bottom: 15px; }
+
+  .result-actions {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-top: 3px solid #667eea;
+  }
+  .result-actions h3 {
+    color: #1e3c72;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  .result-actions .btn-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .reset-confirm {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+    text-align: left;
+  }
+  .reset-confirm p {
+    color: #856404;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
 </style>
 </head>
 <body oncontextmenu="return false">
@@ -242,7 +279,7 @@
         <label>Kelas</label>
         <input type="text" id="inputKelas" placeholder="Contoh: XI DKV 1">
       </div>
-      <button class="btn btn-primary" onclick="startExam()" style="width:100%;">MULAI UJIAN</button>
+      <button class="btn btn-primary btn-block" onclick="startExam()">MULAI UJIAN</button>
       <div style="margin-top:20px;text-align:center;">
         <button class="btn btn-small btn-warning" onclick="openTeacherLogin()">🔐 Mode Guru</button>
       </div>
@@ -270,19 +307,39 @@
     <!-- RESULT SECTION -->
     <div id="resultSection" class="hidden">
       <div class="result-box">
-        <h2 style="color:#1e3c72;">HASIL UJIAN</h2>
+        <h2 style="color:#1e3c72;">📊 HASIL UJIAN</h2>
         <div class="score-circle">
           <div class="score" id="finalScore">0</div>
           <div class="label">NILAI</div>
         </div>
         <div class="result-info">
-          <p><strong>Nama:</strong> <span id="resNama"></span></p>
-          <p><strong>Nomor:</strong> <span id="resNomor"></span></p>
-          <p><strong>Kelas:</strong> <span id="resKelas"></span></p>
-          <p><strong>Jawaban Benar:</strong> <span id="resCorrect"></span> / 50</p>
-          <p><strong>Jumlah Pelanggaran:</strong> <span id="resViolations" style="color:#c62828;font-weight:bold;"></span></p>
+          <p><strong>👤 Nama:</strong> <span id="resNama"></span></p>
+          <p><strong>🔢 Nomor:</strong> <span id="resNomor"></span></p>
+          <p><strong>🏫 Kelas:</strong> <span id="resKelas"></span></p>
+          <p><strong>✅ Jawaban Benar:</strong> <span id="resCorrect"></span> / 50</p>
+          <p><strong>⚠️ Jumlah Pelanggaran:</strong> <span id="resViolations" style="color:#c62828;font-weight:bold;"></span></p>
         </div>
-        <button class="btn btn-danger" onclick="openTeacherLogin()">🔐 Reset Ujian (Guru)</button>
+
+        <!-- AREA AKSI DI HALAMAN HASIL -->
+        <div class="result-actions">
+          <h3>⚙️ Aksi Tambahan</h3>
+          <div class="btn-group">
+            <button class="btn btn-danger" onclick="showResetConfirm()">🔄 Reset Ujian (Guru)</button>
+          </div>
+
+          <!-- Konfirmasi Reset Inline -->
+          <div id="resetConfirmBox" class="reset-confirm hidden">
+            <p><strong>⚠️ Perhatian:</strong> Untuk mereset ujian, Anda harus login sebagai guru terlebih dahulu.</p>
+            <div class="form-group" style="margin-top:10px;">
+              <label style="font-size:13px;">Password Guru:</label>
+              <input type="password" id="resetPassword" placeholder="Masukkan password guru" style="padding:8px;">
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn btn-danger btn-small" onclick="confirmReset()">✓ Konfirmasi Reset</button>
+              <button class="btn btn-small btn-warning" onclick="hideResetConfirm()">✗ Batal</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -291,6 +348,9 @@
       <div class="locked-message">
         <h2>🔒 UJIAN SUDAH DIKERJAKAN</h2>
         <p>Anda telah menyelesaikan ujian ini. Hubungi guru untuk reset jika diperlukan.</p>
+        <div style="margin-top:20px;">
+          <button class="btn btn-warning btn-small" onclick="openTeacherLogin()">🔐 Login Guru untuk Reset</button>
+        </div>
       </div>
     </div>
 
@@ -301,18 +361,29 @@
         <label>Password Guru</label>
         <input type="password" id="teacherPassword" placeholder="Masukkan password">
       </div>
-      <button class="btn btn-primary" onclick="teacherLogin()" style="width:100%;">MASUK</button>
-      <button class="btn btn-small btn-warning" onclick="backFromTeacher()" style="width:100%;margin-top:10px;">Kembali</button>
+      <button class="btn btn-primary btn-block" onclick="teacherLogin()">MASUK</button>
+      <button class="btn btn-small btn-warning btn-block" onclick="backFromTeacher()">Kembali</button>
     </div>
 
     <!-- TEACHER PANEL -->
     <div id="teacherPanel" class="hidden">
       <div class="teacher-panel">
         <h3>⚙️ Panel Guru</h3>
-        <p style="margin-bottom:15px;">Status Ujian: <strong id="teacherStatus"></strong></p>
-        <p style="margin-bottom:15px;">Pelanggaran: <strong id="teacherViolations"></strong></p>
-        <button class="btn btn-danger" onclick="resetExam()">🔄 RESET UJIAN SISWA</button>
-        <button class="btn btn-small btn-warning" onclick="exitTeacher()" style="margin-left:10px;">Keluar</button>
+        <p><strong>Status Ujian:</strong> <span id="teacherStatus"></span></p>
+        <p><strong>Nama Siswa:</strong> <span id="teacherNama"></span></p>
+        <p><strong>Nomor:</strong> <span id="teacherNomor"></span></p>
+        <p><strong>Kelas:</strong> <span id="teacherKelas"></span></p>
+        <p><strong>Nilai:</strong> <span id="teacherScore"></span></p>
+        <p><strong>Pelanggaran:</strong> <span id="teacherViolations" style="color:#c62828;font-weight:bold;"></span></p>
+        
+        <div style="margin-top:20px;padding-top:20px;border-top:2px dashed #ffc107;">
+          <h4 style="color:#856404;margin-bottom:10px;">🔄 Reset Ujian</h4>
+          <p style="font-size:13px;color:#856404;margin-bottom:15px;">
+            Klik tombol di bawah untuk menghapus semua data siswa dan mengizinkan siswa mengerjakan ulang.
+          </p>
+          <button class="btn btn-danger" onclick="resetExam()">🔄 RESET UJIAN SISWA</button>
+          <button class="btn btn-small btn-warning" onclick="exitTeacher()">Keluar</button>
+        </div>
       </div>
     </div>
 
@@ -321,8 +392,8 @@
 
 <script>
 // ============ KONFIGURASI ============
-const TEACHER_PASSWORD = "guru123"; // Ganti password guru di sini
-const EXAM_DURATION = 30 * 60; // 30 menit dalam detik
+const TEACHER_PASSWORD = "guru123";
+const EXAM_DURATION = 30 * 60;
 const MAX_VIOLATIONS = 5;
 
 // ============ SOAL ============
@@ -379,12 +450,10 @@ const questions = [
   {q:"Dalam analisis SWOT, kecukupan modal sehingga dapat membuat promo dan pemasaran yang menarik konsumen merupakan contoh dari...", o:["Weakness","Opportunities","Threats","Strength (Kekuatan)","Risk"], a:4}
 ];
 
-// Kunci jawaban
 const answerKey = [2,0,4,1,3,0,2,4,1,3,0,2,4,1,3,0,2,4,1,3,4,0,2,1,3,4,0,2,1,3,4,1,2,3,4,0,1,2,3,4,4,1,2,3,4,0,1,2,3,4];
 
 // ============ STATE ============
 let currentSection = 'login';
-let previousSection = 'login';
 let timerInterval = null;
 
 // ============ ANTI-COPY ============
@@ -396,6 +465,7 @@ document.addEventListener('dragstart', e => { e.preventDefault(); });
 
 // ============ ANTI-SCREENSHOT ============
 function addViolation(reason) {
+  if (currentSection !== 'exam') return;
   const violations = parseInt(localStorage.getItem('exam_violations') || '0');
   const newCount = violations + 1;
   localStorage.setItem('exam_violations', newCount);
@@ -416,61 +486,44 @@ document.getElementById('warningOverlay').addEventListener('click', () => {
   document.getElementById('warningOverlay').classList.remove('active');
 });
 
-// Deteksi PrintScreen
 document.addEventListener('keydown', e => {
   if (currentSection !== 'exam') return;
-  
-  // PrintScreen
   if (e.key === 'PrintScreen' || e.keyCode === 44) {
     e.preventDefault();
     addViolation('Tombol PrintScreen terdeteksi!');
   }
-  
-  // Windows+Shift+S (Snipping Tool)
   if ((e.key === 'S' || e.key === 's') && e.shiftKey && (e.metaKey || e.ctrlKey)) {
     e.preventDefault();
     addViolation('Snipping Tool terdeteksi!');
   }
-  
-  // Ctrl+P (Print)
   if (e.key === 'p' && e.ctrlKey) {
     e.preventDefault();
     addViolation('Tombol Print terdeteksi!');
   }
-  
-  // Ctrl+S (Save)
   if (e.key === 's' && e.ctrlKey) {
     e.preventDefault();
     addViolation('Tombol Save terdeteksi!');
   }
-  
-  // Ctrl+U (View Source)
   if (e.key === 'u' && e.ctrlKey) {
     e.preventDefault();
     addViolation('View Source terdeteksi!');
   }
-  
-  // F12 (DevTools)
   if (e.key === 'F12') {
     e.preventDefault();
     addViolation('Developer Tools terdeteksi!');
   }
-  
-  // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C
   if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
     e.preventDefault();
     addViolation('Developer Tools terdeteksi!');
   }
 });
 
-// Deteksi blur (window kehilangan fokus)
 window.addEventListener('blur', () => {
   if (currentSection === 'exam') {
     addViolation('Window kehilangan fokus!');
   }
 });
 
-// Deteksi visibility change (tab switch)
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && currentSection === 'exam') {
     addViolation('Pindah tab terdeteksi!');
@@ -479,14 +532,10 @@ document.addEventListener('visibilitychange', () => {
 
 // ============ NAVIGATION ============
 function showSection(section) {
-  previousSection = currentSection;
   currentSection = section;
-  document.getElementById('loginSection').classList.add('hidden');
-  document.getElementById('examSection').classList.add('hidden');
-  document.getElementById('resultSection').classList.add('hidden');
-  document.getElementById('lockedSection').classList.add('hidden');
-  document.getElementById('teacherLoginSection').classList.add('hidden');
-  document.getElementById('teacherPanel').classList.add('hidden');
+  ['login','exam','result','locked','teacherLogin','teacherPanel'].forEach(s => {
+    document.getElementById(s + 'Section').classList.add('hidden');
+  });
   document.getElementById(section + 'Section').classList.remove('hidden');
 }
 
@@ -501,34 +550,28 @@ function startExam() {
     return;
   }
   
-  // Cek apakah sudah pernah mengerjakan
   if (localStorage.getItem('exam_submitted') === 'true') {
-    showSection('locked');
+    showResultPage();
     return;
   }
   
-  // Simpan data siswa
   localStorage.setItem('student_name', nama);
   localStorage.setItem('student_number', nomor);
   localStorage.setItem('student_class', kelas);
   
-  // Simpan waktu mulai jika belum ada
   if (!localStorage.getItem('exam_start_time')) {
     localStorage.setItem('exam_start_time', Date.now().toString());
   }
   
-  // Reset pelanggaran jika baru mulai
   if (!localStorage.getItem('exam_violations')) {
     localStorage.setItem('exam_violations', '0');
   }
   
-  // Tampilkan info
   document.getElementById('dispNama').textContent = nama;
   document.getElementById('dispNomor').textContent = nomor;
   document.getElementById('dispKelas').textContent = kelas;
   document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations');
   
-  // Render soal
   renderQuestions();
   showSection('exam');
   startTimer();
@@ -538,13 +581,11 @@ function startExam() {
 function renderQuestions() {
   const container = document.getElementById('questionsContainer');
   container.innerHTML = '';
-  
   const savedAnswers = JSON.parse(localStorage.getItem('exam_answers') || '{}');
   
   questions.forEach((q, idx) => {
     const div = document.createElement('div');
     div.className = 'question';
-    
     let optionsHtml = '';
     const letters = ['A','B','C','D','E'];
     q.o.forEach((opt, i) => {
@@ -557,7 +598,6 @@ function renderQuestions() {
         </label>
       `;
     });
-    
     div.innerHTML = `
       <span class="question-number">Soal ${idx + 1}</span>
       <div class="question-text">${q.q}</div>
@@ -571,8 +611,6 @@ function selectOption(el, qIdx, optIdx) {
   const answers = JSON.parse(localStorage.getItem('exam_answers') || '{}');
   answers[qIdx] = optIdx;
   localStorage.setItem('exam_answers', JSON.stringify(answers));
-  
-  // Update visual
   const question = el.closest('.question');
   question.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
@@ -592,7 +630,7 @@ function startTimer() {
       document.getElementById('timerDisplay').textContent = '00:00';
       document.getElementById('timerDisplay').classList.remove('warning', 'danger');
       document.getElementById('submitBtn').disabled = false;
-      document.getElementById('submitInfo').textContent = 'Waktu habis! Silakan kumpulkan jawaban Anda.';
+      document.getElementById('submitInfo').textContent = '✅ Waktu habis! Silakan kumpulkan jawaban Anda.';
       document.getElementById('submitInfo').style.color = '#27ae60';
       document.getElementById('submitInfo').style.fontWeight = 'bold';
       return;
@@ -608,9 +646,8 @@ function startTimer() {
     if (remaining <= 60) timerEl.classList.add('danger');
     else if (remaining <= 300) timerEl.classList.add('warning');
     
-    // Update info submit
     if (remaining > 0) {
-      document.getElementById('submitInfo').textContent = `Tombol kumpulkan akan aktif dalam ${display}`;
+      document.getElementById('submitInfo').textContent = `⏰ Tombol kumpulkan akan aktif dalam ${display}`;
     }
   }
   
@@ -627,11 +664,9 @@ function submitExam(autoSubmit = false) {
       alert('Anda belum dapat mengumpulkan jawaban sebelum waktu habis!');
       return;
     }
-    
     if (!confirm('Apakah Anda yakin ingin mengumpulkan jawaban?')) return;
   }
   
-  // Hitung nilai
   const answers = JSON.parse(localStorage.getItem('exam_answers') || '{}');
   let correct = 0;
   for (let i = 0; i < questions.length; i++) {
@@ -641,23 +676,74 @@ function submitExam(autoSubmit = false) {
   const score = Math.round((correct / questions.length) * 100);
   const violations = localStorage.getItem('exam_violations') || '0';
   
-  // Tandai sebagai selesai
   localStorage.setItem('exam_submitted', 'true');
   localStorage.setItem('exam_score', score);
   localStorage.setItem('exam_correct', correct);
   
-  // Stop timer
   if (timerInterval) clearInterval(timerInterval);
   
-  // Tampilkan hasil
+  showResultPage();
+}
+
+// ============ SHOW RESULT PAGE ============
+function showResultPage() {
+  const score = localStorage.getItem('exam_score') || 0;
+  const correct = localStorage.getItem('exam_correct') || 0;
+  const violations = localStorage.getItem('exam_violations') || '0';
+  
   document.getElementById('finalScore').textContent = score;
-  document.getElementById('resNama').textContent = localStorage.getItem('student_name');
-  document.getElementById('resNomor').textContent = localStorage.getItem('student_number');
-  document.getElementById('resKelas').textContent = localStorage.getItem('student_class');
+  document.getElementById('resNama').textContent = localStorage.getItem('student_name') || '-';
+  document.getElementById('resNomor').textContent = localStorage.getItem('student_number') || '-';
+  document.getElementById('resKelas').textContent = localStorage.getItem('student_class') || '-';
   document.getElementById('resCorrect').textContent = correct;
   document.getElementById('resViolations').textContent = violations;
   
   showSection('result');
+}
+
+// ============ RESET CONFIRM (INLINE DI HALAMAN HASIL) ============
+function showResetConfirm() {
+  document.getElementById('resetConfirmBox').classList.remove('hidden');
+  document.getElementById('resetPassword').focus();
+}
+
+function hideResetConfirm() {
+  document.getElementById('resetConfirmBox').classList.add('hidden');
+  document.getElementById('resetPassword').value = '';
+}
+
+function confirmReset() {
+  const pwd = document.getElementById('resetPassword').value;
+  if (pwd === TEACHER_PASSWORD) {
+    if (confirm('⚠️ PERHATIAN!\n\nAnda akan mereset ujian siswa ini.\nSemua data (jawaban, waktu, pelanggaran, nilai) akan dihapus.\n\nLanjutkan reset?')) {
+      executeReset();
+    }
+  } else {
+    alert('❌ Password guru salah!');
+    document.getElementById('resetPassword').value = '';
+    document.getElementById('resetPassword').focus();
+  }
+}
+
+function executeReset() {
+  localStorage.removeItem('student_name');
+  localStorage.removeItem('student_number');
+  localStorage.removeItem('student_class');
+  localStorage.removeItem('exam_start_time');
+  localStorage.removeItem('exam_answers');
+  localStorage.removeItem('exam_violations');
+  localStorage.removeItem('exam_submitted');
+  localStorage.removeItem('exam_score');
+  localStorage.removeItem('exam_correct');
+  
+  document.getElementById('inputNama').value = '';
+  document.getElementById('inputNomor').value = '';
+  document.getElementById('inputKelas').value = '';
+  document.getElementById('resetPassword').value = '';
+  document.getElementById('resetConfirmBox').classList.add('hidden');
+  
+  alert('✅ Ujian berhasil direset!\n\nSiswa sekarang dapat mengerjakan ujian kembali.');
+  showSection('login');
 }
 
 // ============ TEACHER MODE ============
@@ -667,9 +753,15 @@ function openTeacherLogin() {
 
 function backFromTeacher() {
   if (localStorage.getItem('exam_submitted') === 'true') {
-    showSection('result');
+    showResultPage();
   } else if (localStorage.getItem('exam_start_time')) {
+    document.getElementById('dispNama').textContent = localStorage.getItem('student_name');
+    document.getElementById('dispNomor').textContent = localStorage.getItem('student_number');
+    document.getElementById('dispKelas').textContent = localStorage.getItem('student_class');
+    document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations') || '0';
+    renderQuestions();
     showSection('exam');
+    startTimer();
   } else {
     showSection('login');
   }
@@ -685,100 +777,73 @@ function teacherLogin() {
     const nama = localStorage.getItem('student_name') || '-';
     const nomor = localStorage.getItem('student_number') || '-';
     const kelas = localStorage.getItem('student_class') || '-';
+    const score = localStorage.getItem('exam_score') || '0';
     
     document.getElementById('teacherStatus').textContent = submitted ? 
-      `SUDAH DIKUMPULKAN (Nilai: ${localStorage.getItem('exam_score') || 0})` : 
-      (localStorage.getItem('exam_start_time') ? 'SEDANG BERLANGSUNG' : 'BELUM DIMULAI');
+      `✅ SUDAH DIKUMPULKAN` : 
+      (localStorage.getItem('exam_start_time') ? '🔄 SEDANG BERLANGSUNG' : '⏳ BELUM DIMULAI');
+    document.getElementById('teacherNama').textContent = nama;
+    document.getElementById('teacherNomor').textContent = nomor;
+    document.getElementById('teacherKelas').textContent = kelas;
+    document.getElementById('teacherScore').textContent = score;
     document.getElementById('teacherViolations').textContent = violations;
     
     showSection('teacherPanel');
   } else {
-    alert('Password salah!');
+    alert('❌ Password salah!');
   }
 }
 
 function exitTeacher() {
   if (localStorage.getItem('exam_submitted') === 'true') {
-    showSection('result');
+    showResultPage();
   } else if (localStorage.getItem('exam_start_time')) {
+    document.getElementById('dispNama').textContent = localStorage.getItem('student_name');
+    document.getElementById('dispNomor').textContent = localStorage.getItem('student_number');
+    document.getElementById('dispKelas').textContent = localStorage.getItem('student_class');
+    document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations') || '0';
+    renderQuestions();
     showSection('exam');
+    startTimer();
   } else {
     showSection('login');
   }
 }
 
 function resetExam() {
-  if (!confirm('RESET UJIAN?\n\nSemua data siswa (jawaban, waktu, pelanggaran) akan dihapus. Siswa dapat mengerjakan ulang.')) return;
-  
-  localStorage.removeItem('student_name');
-  localStorage.removeItem('student_number');
-  localStorage.removeItem('student_class');
-  localStorage.removeItem('exam_start_time');
-  localStorage.removeItem('exam_answers');
-  localStorage.removeItem('exam_violations');
-  localStorage.removeItem('exam_submitted');
-  localStorage.removeItem('exam_score');
-  localStorage.removeItem('exam_correct');
-  
-  document.getElementById('inputNama').value = '';
-  document.getElementById('inputNomor').value = '';
-  document.getElementById('inputKelas').value = '';
-  
-  alert('Ujian berhasil direset!');
-  showSection('login');
+  if (!confirm('⚠️ RESET UJIAN?\n\nSemua data siswa (jawaban, waktu, pelanggaran, nilai) akan dihapus.\nSiswa dapat mengerjakan ulang.\n\nLanjutkan?')) return;
+  executeReset();
 }
 
 // ============ INIT ============
 window.addEventListener('load', () => {
-  // Cek status saat halaman dimuat
   if (localStorage.getItem('exam_submitted') === 'true') {
-    // Sudah selesai - tampilkan hasil
-    const score = localStorage.getItem('exam_score') || 0;
-    const correct = localStorage.getItem('exam_correct') || 0;
-    const violations = localStorage.getItem('exam_violations') || '0';
-    
-    document.getElementById('finalScore').textContent = score;
-    document.getElementById('resNama').textContent = localStorage.getItem('student_name') || '-';
-    document.getElementById('resNomor').textContent = localStorage.getItem('student_number') || '-';
-    document.getElementById('resKelas').textContent = localStorage.getItem('student_class') || '-';
-    document.getElementById('resCorrect').textContent = correct;
-    document.getElementById('resViolations').textContent = violations;
-    showSection('result');
+    showResultPage();
   } else if (localStorage.getItem('exam_start_time')) {
-    // Sedang berlangsung - lanjutkan
     const startTime = parseInt(localStorage.getItem('exam_start_time'));
     const elapsed = Math.floor((Date.now() - startTime) / 1000);
     
+    document.getElementById('dispNama').textContent = localStorage.getItem('student_name');
+    document.getElementById('dispNomor').textContent = localStorage.getItem('student_number');
+    document.getElementById('dispKelas').textContent = localStorage.getItem('student_class');
+    document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations') || '0';
+    renderQuestions();
+    showSection('exam');
+    
     if (elapsed >= EXAM_DURATION) {
-      // Waktu sudah habis saat refresh, auto submit
-      document.getElementById('dispNama').textContent = localStorage.getItem('student_name');
-      document.getElementById('dispNomor').textContent = localStorage.getItem('student_number');
-      document.getElementById('dispKelas').textContent = localStorage.getItem('student_class');
-      document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations') || '0';
-      renderQuestions();
-      showSection('exam');
       document.getElementById('timerDisplay').textContent = '00:00';
       document.getElementById('submitBtn').disabled = false;
-      document.getElementById('submitInfo').textContent = 'Waktu habis! Silakan kumpulkan jawaban Anda.';
+      document.getElementById('submitInfo').textContent = '✅ Waktu habis! Silakan kumpulkan jawaban Anda.';
       document.getElementById('submitInfo').style.color = '#27ae60';
       document.getElementById('submitInfo').style.fontWeight = 'bold';
     } else {
-      // Lanjutkan ujian
-      document.getElementById('dispNama').textContent = localStorage.getItem('student_name');
-      document.getElementById('dispNomor').textContent = localStorage.getItem('student_number');
-      document.getElementById('dispKelas').textContent = localStorage.getItem('student_class');
-      document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations') || '0';
-      renderQuestions();
-      showSection('exam');
       startTimer();
     }
   } else {
-    // Belum mulai
     showSection('login');
   }
 });
 
-// Cegah refresh dengan peringatan (opsional)
 window.addEventListener('beforeunload', (e) => {
   if (currentSection === 'exam' && localStorage.getItem('exam_submitted') !== 'true') {
     e.preventDefault();

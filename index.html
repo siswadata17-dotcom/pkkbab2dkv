@@ -5,256 +5,133 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ujian Online PKK XI DKV BAB 2</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,sans-serif; }
   body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 20px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    min-height:100vh; padding:20px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
   }
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    overflow: hidden;
-  }
-  .header {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: #fff;
-    padding: 25px;
-    text-align: center;
-  }
-  .header h1 { font-size: 24px; margin-bottom: 5px; }
-  .header p { font-size: 14px; opacity: 0.9; }
-  .content { padding: 30px; }
-  .form-group { margin-bottom: 20px; }
-  .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
-  .form-group input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 15px;
-    transition: border 0.3s;
-  }
-  .form-group input:focus { outline: none; border-color: #667eea; }
-  .btn {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin: 5px;
-  }
-  .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
-  .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102,126,234,0.4); }
-  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-  .btn-danger { background: linear-gradient(135deg, #eb3349, #f45c43); color: #fff; }
-  .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(235,51,73,0.4); }
-  .btn-success { background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; }
-  .btn-warning { background: linear-gradient(135deg, #f7971e, #ffd200); color: #fff; }
-  .btn-info { background: linear-gradient(135deg, #2193b0, #6dd5ed); color: #fff; }
-  .btn-small { padding: 8px 16px; font-size: 13px; }
-  .btn-block { width: 100%; display: block; margin: 10px 0; }
+  input { -webkit-user-select:text !important; user-select:text !important; }
+  .container { max-width:900px; margin:0 auto; background:#fff; border-radius:15px;
+    box-shadow:0 20px 60px rgba(0,0,0,.3); overflow:hidden; }
+  .header { background:linear-gradient(135deg,#1e3c72,#2a5298); color:#fff; padding:25px; text-align:center; }
+  .header h1 { font-size:24px; margin-bottom:5px; }
+  .header p { font-size:14px; opacity:.9; }
+  .content { padding:30px; }
+  .form-group { margin-bottom:20px; }
+  .form-group label { display:block; margin-bottom:8px; font-weight:600; color:#333; }
+  .form-group input { width:100%; padding:12px; border:2px solid #ddd; border-radius:8px; font-size:15px; }
+  .form-group input:focus { outline:none; border-color:#667eea; }
+  .btn { padding:12px 28px; border:none; border-radius:8px; font-size:15px; font-weight:600;
+    cursor:pointer; transition:all .3s; margin:4px; }
+  .btn-primary { background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; }
+  .btn-primary:hover:not(:disabled){ transform:translateY(-2px); }
+  .btn-primary:disabled { opacity:.5; cursor:not-allowed; }
+  .btn-danger { background:linear-gradient(135deg,#eb3349,#f45c43); color:#fff; }
+  .btn-danger:hover { transform:translateY(-2px); }
+  .btn-success { background:linear-gradient(135deg,#11998e,#38ef7d); color:#fff; }
+  .btn-warning { background:linear-gradient(135deg,#f7971e,#ffd200); color:#fff; }
+  .btn-small { padding:8px 16px; font-size:13px; }
+  .btn-block { width:100%; display:block; margin:10px 0; }
 
-  .info-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f8f9fa;
-    padding: 15px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .info-item { font-size: 14px; color: #333; }
-  .info-item strong { color: #1e3c72; }
-  .timer {
-    background: #1e3c72;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: 'Courier New', monospace;
-  }
-  .timer.warning { background: #f39c12; animation: pulse 1s infinite; }
-  .timer.danger { background: #e74c3c; animation: pulse 0.5s infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+  .info-bar { display:flex; justify-content:space-between; align-items:center; background:#f8f9fa;
+    padding:15px 20px; border-radius:10px; margin-bottom:20px; flex-wrap:wrap; gap:10px; }
+  .info-item { font-size:14px; }
+  .info-item strong { color:#1e3c72; }
+  .timer { background:#1e3c72; color:#fff; padding:10px 20px; border-radius:8px;
+    font-size:18px; font-weight:bold; font-family:'Courier New',monospace; }
+  .timer.warning { background:#f39c12; animation:pulse 1s infinite; }
+  .timer.danger { background:#e74c3c; animation:pulse .5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.7} }
+  .violation-counter { background:#ffebee; color:#c62828; padding:8px 15px; border-radius:8px;
+    font-weight:bold; font-size:14px; }
 
-  .violation-counter {
-    background: #ffebee;
-    color: #c62828;
-    padding: 8px 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 14px;
-  }
+  .question { background:#fff; border:2px solid #e0e0e0; border-radius:10px; padding:20px;
+    margin-bottom:15px; transition:all .3s; }
+  .question:hover { border-color:#667eea; }
+  .question-number { display:inline-block; background:#667eea; color:#fff; padding:4px 12px;
+    border-radius:15px; font-size:13px; font-weight:bold; margin-bottom:10px; }
+  .question-text { font-size:15px; color:#333; margin-bottom:15px; line-height:1.6; }
+  .options { display:flex; flex-direction:column; gap:8px; }
+  .option { display:flex; align-items:center; padding:10px 15px; border:2px solid #e0e0e0;
+    border-radius:8px; cursor:pointer; transition:all .2s; }
+  .option:hover { background:#f0f4ff; border-color:#667eea; }
+  .option input { margin-right:10px; cursor:pointer; }
+  .option.selected { background:#e8f0ff; border-color:#667eea; }
 
-  .question {
-    background: #fff;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 15px;
-    transition: all 0.3s;
-  }
-  .question:hover { border-color: #667eea; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
-  .question-number {
-    display: inline-block;
-    background: #667eea;
-    color: #fff;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .question-text { font-size: 15px; color: #333; margin-bottom: 15px; line-height: 1.6; }
-  .options { display: flex; flex-direction: column; gap: 8px; }
-  .option {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .option:hover { background: #f0f4ff; border-color: #667eea; }
-  .option input { margin-right: 10px; cursor: pointer; }
-  .option.selected { background: #e8f0ff; border-color: #667eea; }
+  .result-box { text-align:center; padding:20px; }
+  .score-circle { width:180px; height:180px; border-radius:50%;
+    background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; display:flex; flex-direction:column;
+    justify-content:center; align-items:center; margin:20px auto; box-shadow:0 10px 30px rgba(102,126,234,.4); }
+  .score-circle .score { font-size:48px; font-weight:bold; }
+  .score-circle .label { font-size:14px; opacity:.9; }
+  .result-info { background:#f8f9fa; padding:20px; border-radius:10px; margin:20px 0; text-align:left; }
+  .result-info p { margin:8px 0; font-size:15px; }
+  .result-info strong { color:#1e3c72; }
 
-  .result-box {
-    text-align: center;
-    padding: 30px;
-  }
-  .score-circle {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
-    box-shadow: 0 10px 30px rgba(102,126,234,0.4);
-  }
-  .score-circle .score { font-size: 48px; font-weight: bold; }
-  .score-circle .label { font-size: 14px; opacity: 0.9; }
-  .result-info {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px 0;
-    text-align: left;
-  }
-  .result-info p { margin: 8px 0; font-size: 15px; }
-  .result-info strong { color: #1e3c72; }
+  .result-actions { margin-top:20px; padding:20px; background:#fff3cd; border-radius:10px;
+    border:2px solid #ffc107; }
+  .result-actions h3 { color:#856404; margin-bottom:15px; }
 
-  .warning-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(231, 76, 60, 0.95);
-    color: #fff;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 9999;
-    text-align: center;
-    padding: 20px;
-  }
-  .warning-overlay.active { display: flex; }
-  .warning-overlay h2 { font-size: 36px; margin-bottom: 20px; }
-  .warning-overlay p { font-size: 20px; margin-bottom: 15px; }
-  .warning-overlay .icon { font-size: 80px; margin-bottom: 20px; }
+  .warning-overlay { position:fixed; inset:0; background:rgba(231,76,60,.95); color:#fff;
+    display:none; justify-content:center; align-items:center; flex-direction:column;
+    z-index:9999; text-align:center; padding:20px; }
+  .warning-overlay.active { display:flex; }
+  .warning-overlay h2 { font-size:34px; margin-bottom:20px; }
+  .warning-overlay p { font-size:19px; margin-bottom:12px; }
+  .warning-overlay .icon { font-size:80px; margin-bottom:20px; }
 
-  .teacher-panel {
-    background: #fff3cd;
-    border: 2px solid #ffc107;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-  .teacher-panel h3 { color: #856404; margin-bottom: 15px; font-size: 20px; }
-  .teacher-panel p { margin-bottom: 10px; font-size: 15px; }
+  /* ===== MODAL RESET (PENTING) ===== */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.75); z-index:10000;
+    display:none; justify-content:center; align-items:center; padding:20px; }
+  .modal-overlay.active { display:flex; }
+  .modal-box { background:#fff; border-radius:15px; padding:30px; max-width:420px; width:100%;
+    box-shadow:0 20px 60px rgba(0,0,0,.5); text-align:center; animation:pop .25s ease; }
+  @keyframes pop { from{transform:scale(.85);opacity:0} to{transform:scale(1);opacity:1} }
+  .modal-box h3 { color:#c62828; margin-bottom:12px; font-size:20px; }
+  .modal-box p { color:#555; font-size:14px; margin-bottom:15px; line-height:1.5; }
+  .modal-box input { width:100%; padding:12px; border:2px solid #ddd; border-radius:8px;
+    font-size:15px; margin-bottom:15px; text-align:center; }
+  .modal-box input:focus { outline:none; border-color:#667eea; }
+  .modal-actions { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .reset-error { color:#c62828 !important; font-weight:bold; margin-top:10px; min-height:18px; }
 
-  .hidden { display: none !important; }
-
-  .submit-area {
-    text-align: center;
-    margin-top: 30px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 10px;
-  }
-  .submit-area p { margin-bottom: 15px; color: #666; font-size: 14px; }
-
-  .locked-message {
-    background: #ffebee;
-    border: 2px solid #ef5350;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    color: #c62828;
-  }
-  .locked-message h2 { margin-bottom: 15px; }
-
-  .result-actions {
-    margin-top: 25px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    border-top: 3px solid #667eea;
-  }
-  .result-actions h3 {
-    color: #1e3c72;
-    margin-bottom: 15px;
-    font-size: 16px;
-  }
-  .result-actions .btn-group {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .reset-confirm {
-    background: #fff3cd;
-    border: 2px solid #ffc107;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 15px;
-    text-align: left;
-  }
-  .reset-confirm p {
-    color: #856404;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
+  .teacher-panel { background:#fff3cd; border:2px solid #ffc107; padding:20px; border-radius:10px; }
+  .teacher-panel h3 { color:#856404; margin-bottom:15px; }
+  .teacher-panel p { margin-bottom:10px; font-size:15px; }
+  .hidden { display:none !important; }
+  .submit-area { text-align:center; margin-top:30px; padding:20px; background:#f8f9fa; border-radius:10px; }
+  .submit-area p { margin-bottom:15px; color:#666; font-size:14px; }
+  .locked-message { background:#ffebee; border:2px solid #ef5350; padding:30px; border-radius:10px;
+    text-align:center; color:#c62828; }
+  .locked-message h2 { margin-bottom:15px; }
 </style>
 </head>
 <body oncontextmenu="return false">
 
-<!-- WARNING OVERLAY -->
+<!-- WARNING ANTI-SCREENSHOT -->
 <div class="warning-overlay" id="warningOverlay">
   <div class="icon">⚠️</div>
   <h2>PELANGGARAN TERDETEKSI!</h2>
-  <p id="warningText">Aktivitas screenshot/tab switch terdeteksi!</p>
+  <p id="warningText">Aktivitas terlarang terdeteksi!</p>
   <p>Pelanggaran: <span id="warningCount">0</span> / 5</p>
-  <p style="font-size:14px;opacity:0.9;">Klik di mana saja untuk menutup</p>
+  <p style="font-size:14px;opacity:.9">Klik di mana saja untuk menutup</p>
+</div>
+
+<!-- ===== MODAL RESET (MUNCUL DI TENGAH LAYAR) ===== -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal-box">
+    <h3>🔐 RESET UJIAN (KHUSUS GURU)</h3>
+    <p>Semua data siswa (jawaban, waktu, pelanggaran, nilai) akan <b>dihapus permanen</b>.<br>
+       Siswa dapat mengerjakan ujian kembali.</p>
+    <input type="password" id="resetPassword" placeholder="Masukkan password guru"
+           onkeydown="if(event.key==='Enter'){confirmReset();}">
+    <div class="modal-actions">
+      <button class="btn btn-danger" onclick="confirmReset()">✓ Konfirmasi Reset</button>
+      <button class="btn btn-warning" onclick="hideResetConfirm()">✗ Batal</button>
+    </div>
+    <p class="reset-error" id="resetError"></p>
+  </div>
 </div>
 
 <div class="container">
@@ -264,124 +141,94 @@
   </div>
   <div class="content">
 
-    <!-- LOGIN FORM -->
+    <!-- LOGIN -->
     <div id="loginSection">
       <h2 style="margin-bottom:20px;color:#1e3c72;">Formulir Peserta</h2>
-      <div class="form-group">
-        <label>Nama Lengkap</label>
-        <input type="text" id="inputNama" placeholder="Masukkan nama lengkap">
-      </div>
-      <div class="form-group">
-        <label>Nomor Absen</label>
-        <input type="text" id="inputNomor" placeholder="Masukkan nomor absen">
-      </div>
-      <div class="form-group">
-        <label>Kelas</label>
-        <input type="text" id="inputKelas" placeholder="Contoh: XI DKV 1">
-      </div>
+      <div class="form-group"><label>Nama Lengkap</label>
+        <input type="text" id="inputNama" placeholder="Masukkan nama lengkap"></div>
+      <div class="form-group"><label>Nomor Absen</label>
+        <input type="text" id="inputNomor" placeholder="Masukkan nomor absen"></div>
+      <div class="form-group"><label>Kelas</label>
+        <input type="text" id="inputKelas" placeholder="Contoh: XI DKV 1"></div>
       <button class="btn btn-primary btn-block" onclick="startExam()">MULAI UJIAN</button>
-      <div style="margin-top:20px;text-align:center;">
+      <div style="margin-top:20px;text-align:center">
         <button class="btn btn-small btn-warning" onclick="openTeacherLogin()">🔐 Mode Guru</button>
       </div>
     </div>
 
-    <!-- EXAM SECTION -->
+    <!-- EXAM -->
     <div id="examSection" class="hidden">
       <div class="info-bar">
-        <div class="info-item"><strong id="dispNama"></strong> | No: <strong id="dispNomor"></strong> | Kelas: <strong id="dispKelas"></strong></div>
+        <div class="info-item"><strong id="dispNama"></strong> | No: <strong id="dispNomor"></strong> |
+          Kelas: <strong id="dispKelas"></strong></div>
         <div class="timer" id="timerDisplay">30:00</div>
         <div class="violation-counter">Pelanggaran: <span id="violationCount">0</span>/5</div>
       </div>
-
       <div id="questionsContainer"></div>
-
       <div class="submit-area">
         <p id="submitInfo">Tombol kumpulkan akan aktif setelah waktu habis</p>
         <button class="btn btn-success" id="submitBtn" onclick="submitExam()" disabled>KUMPULKAN JAWABAN</button>
-        <div style="margin-top:15px;">
+        <div style="margin-top:15px">
           <button class="btn btn-small btn-warning" onclick="openTeacherLogin()">🔐 Mode Guru</button>
         </div>
       </div>
     </div>
 
-    <!-- RESULT SECTION -->
+    <!-- RESULT -->
     <div id="resultSection" class="hidden">
       <div class="result-box">
-        <h2 style="color:#1e3c72;">📊 HASIL UJIAN</h2>
-        <div class="score-circle">
-          <div class="score" id="finalScore">0</div>
-          <div class="label">NILAI</div>
-        </div>
+        <h2 style="color:#1e3c72">📊 HASIL UJIAN</h2>
+        <div class="score-circle"><div class="score" id="finalScore">0</div><div class="label">NILAI</div></div>
         <div class="result-info">
           <p><strong>👤 Nama:</strong> <span id="resNama"></span></p>
           <p><strong>🔢 Nomor:</strong> <span id="resNomor"></span></p>
           <p><strong>🏫 Kelas:</strong> <span id="resKelas"></span></p>
           <p><strong>✅ Jawaban Benar:</strong> <span id="resCorrect"></span> / 50</p>
-          <p><strong>⚠️ Jumlah Pelanggaran:</strong> <span id="resViolations" style="color:#c62828;font-weight:bold;"></span></p>
+          <p><strong>⚠️ Jumlah Pelanggaran:</strong>
+             <span id="resViolations" style="color:#c62828;font-weight:bold"></span></p>
         </div>
-
-        <!-- AREA AKSI DI HALAMAN HASIL -->
         <div class="result-actions">
-          <h3>⚙️ Aksi Tambahan</h3>
-          <div class="btn-group">
-            <button class="btn btn-danger" onclick="showResetConfirm()">🔄 Reset Ujian (Guru)</button>
-          </div>
-
-          <!-- Konfirmasi Reset Inline -->
-          <div id="resetConfirmBox" class="reset-confirm hidden">
-            <p><strong>⚠️ Perhatian:</strong> Untuk mereset ujian, Anda harus login sebagai guru terlebih dahulu.</p>
-            <div class="form-group" style="margin-top:10px;">
-              <label style="font-size:13px;">Password Guru:</label>
-              <input type="password" id="resetPassword" placeholder="Masukkan password guru" style="padding:8px;">
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <button class="btn btn-danger btn-small" onclick="confirmReset()">✓ Konfirmasi Reset</button>
-              <button class="btn btn-small btn-warning" onclick="hideResetConfirm()">✗ Batal</button>
-            </div>
-          </div>
+          <h3>⚙️ Aksi Guru</h3>
+          <button class="btn btn-danger" onclick="showResetConfirm()">🔄 RESET UJIAN SISWA</button>
+          <button class="btn btn-small btn-warning" onclick="openTeacherLogin()">🔐 Panel Guru</button>
         </div>
       </div>
     </div>
 
-    <!-- LOCKED SECTION -->
+    <!-- LOCKED -->
     <div id="lockedSection" class="hidden">
       <div class="locked-message">
         <h2>🔒 UJIAN SUDAH DIKERJAKAN</h2>
-        <p>Anda telah menyelesaikan ujian ini. Hubungi guru untuk reset jika diperlukan.</p>
-        <div style="margin-top:20px;">
-          <button class="btn btn-warning btn-small" onclick="openTeacherLogin()">🔐 Login Guru untuk Reset</button>
+        <p>Hubungi guru untuk reset jika diperlukan.</p>
+        <div style="margin-top:20px">
+          <button class="btn btn-danger btn-small" onclick="showResetConfirm()">🔄 Reset (Guru)</button>
+          <button class="btn btn-warning btn-small" onclick="openTeacherLogin()">🔐 Login Guru</button>
         </div>
       </div>
     </div>
 
     <!-- TEACHER LOGIN -->
     <div id="teacherLoginSection" class="hidden">
-      <h2 style="color:#1e3c72;margin-bottom:20px;">🔐 Login Guru</h2>
-      <div class="form-group">
-        <label>Password Guru</label>
-        <input type="password" id="teacherPassword" placeholder="Masukkan password">
-      </div>
+      <h2 style="color:#1e3c72;margin-bottom:20px">🔐 Login Guru</h2>
+      <div class="form-group"><label>Password Guru</label>
+        <input type="password" id="teacherPassword" placeholder="Masukkan password"></div>
       <button class="btn btn-primary btn-block" onclick="teacherLogin()">MASUK</button>
       <button class="btn btn-small btn-warning btn-block" onclick="backFromTeacher()">Kembali</button>
     </div>
 
-    <!-- TEACHER PANEL -->
-    <div id="teacherPanel" class="hidden">
+    <!-- TEACHER PANEL (ID BENAR: teacherPanelSection) -->
+    <div id="teacherPanelSection" class="hidden">
       <div class="teacher-panel">
         <h3>⚙️ Panel Guru</h3>
-        <p><strong>Status Ujian:</strong> <span id="teacherStatus"></span></p>
-        <p><strong>Nama Siswa:</strong> <span id="teacherNama"></span></p>
+        <p><strong>Status:</strong> <span id="teacherStatus"></span></p>
+        <p><strong>Nama:</strong> <span id="teacherNama"></span></p>
         <p><strong>Nomor:</strong> <span id="teacherNomor"></span></p>
         <p><strong>Kelas:</strong> <span id="teacherKelas"></span></p>
         <p><strong>Nilai:</strong> <span id="teacherScore"></span></p>
-        <p><strong>Pelanggaran:</strong> <span id="teacherViolations" style="color:#c62828;font-weight:bold;"></span></p>
-        
-        <div style="margin-top:20px;padding-top:20px;border-top:2px dashed #ffc107;">
-          <h4 style="color:#856404;margin-bottom:10px;">🔄 Reset Ujian</h4>
-          <p style="font-size:13px;color:#856404;margin-bottom:15px;">
-            Klik tombol di bawah untuk menghapus semua data siswa dan mengizinkan siswa mengerjakan ulang.
-          </p>
-          <button class="btn btn-danger" onclick="resetExam()">🔄 RESET UJIAN SISWA</button>
+        <p><strong>Pelanggaran:</strong>
+           <span id="teacherViolations" style="color:#c62828;font-weight:bold"></span></p>
+        <div style="margin-top:20px;padding-top:20px;border-top:2px dashed #ffc107">
+          <button class="btn btn-danger" onclick="showResetConfirm()">🔄 RESET UJIAN SISWA</button>
           <button class="btn btn-small btn-warning" onclick="exitTeacher()">Keluar</button>
         </div>
       </div>
@@ -391,466 +238,302 @@
 </div>
 
 <script>
-// ============ KONFIGURASI ============
+/* ================= KONFIGURASI ================= */
 const TEACHER_PASSWORD = "guru123";
 const EXAM_DURATION = 30 * 60;
 const MAX_VIOLATIONS = 5;
 
-// ============ SOAL ============
+/* ================= SOAL (50) ================= */
 const questions = [
-  {q:"Ciri peluang usaha yang baik di mana peluang tersebut berasal dari pemikiran dan perhitungan sendiri, bukan hasil nekat meniru orang lain, disebut...", o:["Fleksibel","Inovatif","Orisinal","Strategis","Sistematis"], a:2},
-  {q:"Setiap peluang usaha harus memiliki ketahanan akan perubahan zaman dan tidak terpaku pada satu tren semata. Hal ini merupakan ciri peluang usaha yang...", o:["Dapat mengantisipasi perubahan, persaingan, dan kebutuhan pasar di masa yang akan datang","Benar-benar sesuai dengan keinginan agar peluang bisa bertahan lama","Dilandasi dengan keyakinan karena masa depan akan selalu berubah-ubah","Memiliki rasa senang dalam menjalankannya","Sudah teruji melalui riset risiko dan pangsa pasar"], a:0},
-  {q:"Berikut ini yang termasuk contoh risiko teknis (kerugian) dalam berwirausaha adalah...", o:["Adanya perkembangan teknologi yang membuat produk menjadi kuno","Kehilangan reputasi atau nama besar di mata masyarakat","Bencana alam seperti gempa bumi atau tanah longsor","Kehilangan kesempatan bisnis karena keterlambatan informasi","Biaya produksi yang tinggi akibat inefisiensi"], a:4},
-  {q:"Risiko yang terjadi akibat produk yang dihasilkan kurang laku atau tidak laku di pasar, serta produk menjadi kuno akibat penerimaan yang terus menurun, disebut...", o:["Risiko riil","Risiko pasar","Risiko psikologis","Risiko force majeure","Risiko teknis"], a:1},
-  {q:"Risiko yang kemungkinan terjadinya sangat kecil atau hampir tidak ada, seperti bencana alam gempa bumi atau tanah longsor, dikategorikan sebagai...", o:["Risiko riil","Risiko pasar","Risiko psikologis","Risiko di luar kemampuan manusia (Force Majeure)","Risiko teknis"], a:3},
-  {q:"Risiko yang terlihat, bisa dihitung, bisa diantisipasi, dan bisa dihindari, seperti kehilangan modal atau kehilangan mata pencaharian, disebut...", o:["Risiko riil","Risiko pasar","Risiko psikologis","Risiko force majeure","Risiko teknis"], a:0},
-  {q:"Kehilangan reputasi, hilangnya rasa percaya diri, hingga kehilangan motivasi merupakan contoh dari...", o:["Risiko riil","Risiko pasar","Risiko psikologis","Risiko force majeure","Risiko teknis"], a:2},
-  {q:"Usaha yang sesuai dengan keinginan akan dilakukan dengan senang hati. Jika tidak sesuai keinginan, usaha akan dikerjakan setengah hati. Ini adalah ciri peluang usaha yang...", o:["Orisinal dan tidak meniru","Dapat mengantisipasi perubahan","Sudah teruji melalui riset","Dilandasi dengan keyakinan","Benar-benar sesuai dengan keinginan agar peluang bisa bertahan lama"], a:4},
-  {q:"Sebelum menekuni suatu usaha, seorang wirausahawan harus melakukan riset risiko dan pangsa pasar agar keyakinannya benar-benar teruji. Hal ini merujuk pada ciri peluang usaha yang...", o:["Orisinal","Sudah teruji melalui riset","Sesuai keinginan","Menghasilkan rasa senang","Mengantisipasi perubahan"], a:1},
-  {q:"Pasar masih membutuhkan produk desain grafis, namun wirausahawan harus yakin dalam melakukannya karena masa depan akan selalu berubah-ubah. Tanpa keyakinan, wirausahawan tidak akan mampu...", o:["Menghitung modal awal","Merekrut karyawan","Mencari lokasi usaha","Menghadapi perubahan","Membuat laporan keuangan"], a:3},
-  {q:"Salah satu cara mengatasi risiko teknis adalah dengan menambah pengetahuan dan keterampilan. Keterampilan yang berkaitan dengan proses produksi agar dapat menurunkan biaya produksi (efisien) disebut...", o:["Keterampilan teknis (technological skill)","Kemampuan memimpin (managerial skill)","Kemampuan mengorganisasi (organizational skill)","Kemampuan konseptual (conceptual skill)","Kemampuan analitis (analytical skill)"], a:0},
-  {q:"Kemampuan meramu faktor produksi dalam usaha secara tepat, mencakup sumber daya modal dan tenaga kerja, merupakan bagian dari penambahan keterampilan untuk mengatasi risiko teknis, yaitu...", o:["Keterampilan teknis","Kemampuan konseptual","Kemampuan mengorganisasi (organizational skill)","Kemampuan memimpin","Kemampuan negosiasi"], a:2},
-  {q:"Seorang pemimpin dituntut membuat konsep kerja yang baik (conceptual skill) agar tujuan usaha dapat dikerjakan dengan baik dan serasi oleh semua orang dalam organisasi. Keterampilan ini disebut...", o:["Technological skill","Financial skill","Marketing skill","Operational skill","Managerial skill"], a:4},
-  {q:"Untuk mengantisipasi risiko pasar di mana produk menjadi kuno atau tidak laku, salah satu upaya yang dapat ditempuh adalah mengadakan inovasi (product innovation), yaitu...", o:["Menurunkan harga jual secara drastis","Membuat desain baru dari produk teknik komputer dan informatika","Memecat karyawan yang kurang produktif","Mengalihkan kerugian ke perusahaan asuransi","Menutup usaha dan mencari peluang lain"], a:1},
-  {q:"Upaya memperoleh informasi tentang pasar secara berkesinambungan untuk mengantisipasi risiko pasar memerlukan dana yang besar dan umumnya hanya layak dilakukan oleh...", o:["Usaha mikro","Usaha kecil","Usaha menengah","Usaha yang besar","Usaha rintisan (startup)"], a:3},
-  {q:"Dalam analisis SWOT, kecukupan modal, sumber daya manusia yang berkualitas, dan koneksi bisnis yang banyak termasuk dalam kategori...", o:["Strength (Kekuatan)","Weakness (Kelemahan)","Opportunities (Peluang)","Threats (Ancaman)","Strategy (Strategi)"], a:0},
-  {q:"Adanya karyawan yang memiliki pelayanan buruk dan banyaknya pembayaran tersendat oleh konsumen sehingga terjadi ketimpangan modal dengan keuntungan, dalam analisis SWOT dikategorikan sebagai...", o:["Strength","Opportunities","Weakness (Kelemahan)","Threats","Innovation"], a:2},
-  {q:"Dalam analisis SWOT, banyaknya usaha baru sejenis yang bermunculan dan mengancam kerja sama dengan para pelanggan dikategorikan sebagai...", o:["Strength","Weakness","Opportunities","Innovation","Threats (Ancaman)"], a:4},
-  {q:"Dalam analisis SWOT, analisis terhadap permintaan konsumen yang mulai berkurang akibat persaingan dengan wirausaha lainnya dikategorikan sebagai...", o:["Strength","Weakness (Kelemahan)","Opportunities","Threats","Strategy"], a:1},
-  {q:"Salah satu kriteria produk kreatif adalah 'Inovatif'. Maksud dari Inovatif dalam konteks produk teknik komputer dan informatika adalah...", o:["Produk mampu dipakai dan digunakan dalam bidang teknik komputer","Produk dapat dimengerti dan dibuat dengan proses yang sama","Produk memiliki nilai estetika yang tinggi","Produk yang sudah ada dibuat lebih menarik daripada sebelumnya","Produk dibuat dengan biaya produksi yang sangat rendah"], a:3},
-  {q:"Salah satu jenis peluang usaha di bidang teknik komputer dan informatika yang dapat menerima pesanan kepada para pelanggan walaupun jumlahnya hanya sedikit (satu) adalah...", o:["Studio foto","Jasa video shooting","Jasa desainer web","Jasa pembuatan animasi","Usaha digital printing"], a:4},
-  {q:"Dalam analisis SWOT, tempat usaha yang mudah dicari dan dijangkau oleh konsumen serta customer merupakan contoh dari...", o:["Strength (Kekuatan)","Weakness (Kelemahan)","Opportunities (Peluang)","Threats (Ancaman)","Risk (Risiko)"], a:0},
-  {q:"Langkah penetapan kelayakan usaha yang bertujuan untuk mengetahui prospek usaha dengan melakukan riset pasar untuk menemukan keinginan pasar serta segi demografis konsumen disebut...", o:["Analisis kelayakan teknis","Analisis kelayakan finansial","Analisis peluang pasar","Uji coba pasar","Studi kelayakan pasar"], a:2},
-  {q:"Langkah penetapan kelayakan usaha yang bertujuan untuk mengetahui jenis konsumen yang menyukai usaha produk kreatif teknik komputer dan informatika yang akan dibuat disebut...", o:["Menentukan segmen pasar","Menentukan jumlah konsumen potensial","Sumber informasi pasar","Uji coba menjual produk","Analisis kelayakan keuangan"], a:1},
-  {q:"Langkah penetapan kelayakan usaha yang cenderung menjadi teknik riset utama untuk mengurangi risiko yang ada pada suatu usaha dengan membuat karya baru dan melihat respons masyarakat disebut...", o:["Analisis kelayakan teknis","Analisis peluang pasar","Menentukan segmen pasar","Uji coba pasar","Studi kelayakan pasar"], a:3},
-  {q:"Analisis kelayakan finansial jangka panjang dalam usaha produk teknik komputer dan informatika biasanya digunakan untuk aspek finansial seperti...", o:["Alat transportasi harian","Bahan material produk","Gaji karyawan bulanan","Biaya operasional satu bulan","Memperluas dan mempertahankan keutuhan usaha"], a:4},
-  {q:"Sebelum peluang usaha baru diimplementasikan, analisis kelayakan teknis meliputi pembuatan produk kreatif yang dibutuhkan dan disukai masyarakat, khususnya dalam membuat produk...", o:["Multimedia","Pertanian","Pertambangan","Perikanan","Perkebunan"], a:0},
-  {q:"Dalam analisis kelayakan finansial, penentuan kebutuhan finansial total dilakukan satu bulan sekali agar kebutuhan finansial tercukupi. Hal ini berkaitan dengan aspek finansial seperti alat transportasi, alat mencetak, dan bahan material, yang termasuk dalam kategori...", o:["Finansial jangka panjang","Finansial jangka menengah","Finansial jangka pendek","Finansial investasi","Finansial spekulatif"], a:2},
-  {q:"Studi kelayakan pasar merupakan analisis lebih lanjut dari kegiatan uji coba pasar. Tujuan utama dari studi kelayakan pasar bagi wirausaha baru adalah...", o:["Meningkatkan harga jual produk secara drastis","Mengurangi risiko kerugian dan kegagalan usaha produk barang atau jasa","Mengetahui jumlah karyawan yang harus dipecat","Mengalihkan seluruh risiko ke perusahaan asuransi","Meniru strategi pemasaran pesaing terbesar"], a:1},
-  {q:"Dalam analisis SWOT, banyaknya pembayaran tersendat yang dilakukan oleh konsumen sehingga ada ketimpangan antara modal dengan keuntungan dikategorikan sebagai...", o:["Strength","Opportunities","Threats","Weakness (Kelemahan)","Innovation"], a:3},
-  {q:"Seorang wirausaha membuka usaha di bidang yang tidak ia kuasai dan tidak ia minati, sehingga ia sering menunda pekerjaan dan mengerjakannya secara setengah hati. Akibatnya, usaha tersebut gagal. Hal ini menunjukkan pelanggaran terhadap ciri peluang usaha yang baik, yaitu...", o:["Peluang itu orisinal dan tidak meniru","Peluang itu harus dapat mengantisipasi perubahan","Peluang itu harus benar-benar sesuai dengan keinginan agar bisa bertahan lama","Peluang itu sudah teruji melalui riset risiko dan pangsa pasar","Peluang itu harus ada rasa senang dalam menjalankannya"], a:4},
-  {q:"Sebuah perusahaan multimedia mengalami pemogokan karyawan akibat kesejahteraan yang kurang diperhatikan, serta penempatan tenaga kerja yang kurang tepat sehingga produktivitas menurun. Jenis risiko dan solusi utama yang paling tepat untuk mengatasi hal ini adalah...", o:["Risiko pasar; melakukan inovasi produk","Risiko teknis; menambah kemampuan mengorganisasi (organizational skill) dan memimpin (managerial skill)","Risiko force majeure; mengalihkan kerugian ke asuransi","Risiko psikologis; meningkatkan motivasi karyawan","Risiko riil; menghitung ulang kehilangan modal"], a:1},
-  {q:"Produk perangkat lunak yang dihasilkan oleh sebuah startup tiba-tiba menjadi kuno (obsolescence) karena munculnya teknologi baru yang lebih efisien, sehingga penerimaan (revenue) terus menurun. Upaya yang paling tepat untuk mengantisipasi risiko ini di masa depan adalah...", o:["Mengalihkan kerugian ke perusahaan asuransi","Menurunkan kualitas produk untuk menekan biaya","Mengadakan inovasi (product innovation) dan penelitian pasar (market research) secara berkesinambungan","Menutup usaha dan menghindari persaingan","Menyalahkan pemerintah atas peraturan baru"], a:2},
-  {q:"Sebuah studio foto mengalami kebakaran akibat keteledoran dan kurang kecermatan dalam pengawasan, serta terus-menerus mengalami kerugian karena biaya yang membengkak. Selain menambah keterampilan teknis, strategi terarah untuk masa depan yang harus dibuat agar usaha tetap berkembang dan bertahan (survive) adalah...", o:["Mengabaikan keluhan pelanggan","Membuat perencanaan dan desain yang salah","Menempatkan tenaga kerja secara acak","Membuat strategi yang terarah untuk masa depan agar usaha tetap survive","Menghindari penggunaan metode yang efisien"], a:3},
-  {q:"Seorang desainer grafis kehilangan reputasi dan nama besar di mata klien karena sering mengabaikan deadline, yang kemudian menumbuhkan sikap paranoid dan hilangnya rasa percaya diri. Risiko yang dialami desainer tersebut dikategorikan sebagai...", o:["Risiko teknis","Risiko pasar","Risiko force majeure","Risiko riil","Risiko psikologis"], a:4},
-  {q:"Seorang wirausaha perlu memperhitungkan aspek finansial seperti alat transportasi harian, alat mencetak produk kreatif, dan bahan material untuk membuat produk tersebut dalam periode satu bulan sekali agar tidak mengalami kelebihan dan kekurangan dana. Hal ini termasuk dalam analisis kelayakan finansial...", o:["Jangka pendek","Jangka menengah","Jangka panjang","Jangka sangat panjang","Jangka investasi"], a:0},
-  {q:"Analisis terhadap permintaan konsumen yang mulai berkurang terhadap produk teknik komputer dan informatika akibat persaingan ketat dengan wirausaha lainnya, serta adanya karyawan yang memiliki pelayanan buruk, dalam analisis SWOT diklasifikasikan sebagai...", o:["Strength (Kekuatan)","Weakness (Kelemahan)","Opportunities (Peluang)","Strategy (Strategi)","Threats (Ancaman)"], a:1},
-  {q:"Sebuah perusahaan desain memiliki koneksi atau hubungan bisnis yang banyak, yang dapat mempermudah pemasaran produk teknik komputer dan informatika. Dalam analisis SWOT, hal ini merupakan...", o:["Weakness","Threats","Strength (Kekuatan)","Opportunities","Risk"], a:2},
-  {q:"Tujuan utama dari analisis pesaing dalam usaha produk teknik komputer dan informatika adalah...", o:["Untuk mengetahui langkah-langkah pengembangan usaha agar tidak lengah terhadap tindakan pesaing","Untuk meniru semua strategi pesaing secara membabi buta","Untuk menjatuhkan reputasi pesaing di mata konsumen","Untuk menghindari inovasi produk baru","Untuk memonopoli pasar secara ilegal"], a:3},
-  {q:"Sebuah usaha jasa video shooting memiliki kualitas dan nilai estetika produk yang tinggi sehingga konsumen merasa senang dengan produk yang dibuat. Namun, tempat usahanya sulit dicari dan dijangkau oleh konsumen. Dalam analisis SWOT, 'tempat usaha sulit dijangkau' dikategorikan sebagai...", o:["Strength","Opportunities","Threats","Weakness (Kelemahan)","Innovation"], a:4},
-  {q:"Seorang wirausaha mengalami kehilangan modal dan kehilangan kesempatan bisnis karena adanya pengalihan gaya bisnis keluarga menjadi gaya bisnis profesional yang tidak terkendali. Risiko yang terlihat, bisa dihitung, dan bisa dihindari ini disebut...", o:["Risiko psikologis","Risiko pasar","Risiko force majeure","Risiko teknis","Risiko riil"], a:4},
-  {q:"Dalam upaya menambah pengetahuan dan keterampilan untuk mengatasi risiko teknis, kemampuan untuk mencapai tujuan usaha dan dapat dikerjakan dengan baik serta serasi oleh semua orang dalam organisasi usaha disebut...", o:["Technological skill","Managerial skill","Conceptual skill","Operational skill","Analytical skill"], a:1},
-  {q:"Melakukan analisis pesaing dengan usaha produk teknik komputer dan informatika yang sama sangat penting untuk kelanjutan usaha. Hal ini merupakan bagian dari langkah...", o:["Analisis kelayakan teknis","Analisis kelayakan finansial","Membedakan persaingan","Menentukan segmen pasar","Uji coba pasar"], a:2},
-  {q:"Menentukan segmentasi pasar bertujuan untuk mengetahui jenis konsumen yang menyukai usaha produk kreatif teknik komputer dan informatika yang akan dibuat. Langkah ini merupakan bagian dari...", o:["Analisis kelayakan teknis","Analisis kelayakan finansial","Uji coba pasar","Menentukan segmen pasar","Studi kelayakan pasar"], a:3},
-  {q:"Risiko di luar kemampuan manusia (Force Majeure) seperti bencana alam memiliki kemungkinan terjadinya yang sangat kecil atau hampir tidak ada. Namun, jika hal ini terjadi, dampaknya bisa fatal. Contoh risiko force majeure adalah...", o:["Kebakaran akibat keteledoran karyawan","Pencurian atau penipuan karena pengawasan kurang baik","Produk menjadi kuno akibat perkembangan teknologi","Kehilangan reputasi di mata masyarakat","Gempa bumi atau tanah longsor"], a:4},
-  {q:"Salah satu tujuan mengadakan inovasi dalam produk teknik komputer dan informatika adalah untuk menyesuaikan perkembangan teknologi. Selain itu, inovasi juga bertujuan untuk...", o:["Memenuhi keinginan dan kebutuhan masyarakat khusus dalam bidang multimedia","Meningkatkan biaya produksi secara signifikan","Mengurangi jumlah konsumen potensial","Menghindari penggunaan komputer dalam proses produksi","Meniru produk pesaing tanpa modifikasi"], a:0},
-  {q:"Seorang animator 3D mendesain atau merancang animasi tiga dimensi. Software yang umumnya digunakan oleh animator 3D untuk menganimasikan objek antar keyframe adalah...", o:["Microsoft Word dan Excel","3D Studio Max, Maya, atau Blender","Adobe Audition dan Pro Tools","Corel Draw dan Illustrator","Notepad dan TextEdit"], a:1},
-  {q:"Perbedaan mendasar antara risiko riil dan risiko psikologis dalam berwirausaha adalah...", o:["Risiko riil tidak terlihat, sedangkan risiko psikologis bisa dihitung","Risiko riil hanya terjadi pada usaha besar, sedangkan risiko psikologis pada usaha kecil","Risiko riil terlihat, bisa dihitung, dan diantisipasi, sedangkan risiko psikologis tidak terlihat, tidak terhitung, dan belum tentu bisa dihindarkan","Risiko riil disebabkan oleh force majeure, sedangkan risiko psikologis disebabkan oleh pasar","Tidak ada perbedaan, keduanya adalah istilah yang sama"], a:2},
-  {q:"Sifat-sifat orang yang memiliki kreativitas tinggi cenderung fleksibel. Artinya adalah...", o:["Luwes dan mau menerima ide orang lain","Tidak mau terikat pada aturan-aturan tertentu","Bekerja keras tanpa henti","Berpusat pada diri sendiri","Tidak konvensional dan apa adanya"], a:3},
-  {q:"Dalam analisis SWOT, kecukupan modal sehingga dapat membuat promo dan pemasaran yang menarik konsumen merupakan contoh dari...", o:["Weakness","Opportunities","Threats","Strength (Kekuatan)","Risk"], a:4}
+{q:"Ciri peluang usaha yang baik yang berasal dari pemikiran dan perhitungan sendiri, bukan nekat meniru orang lain, disebut...",o:["Fleksibel","Inovatif","Orisinal","Strategis","Sistematis"],a:2},
+{q:"Setiap peluang usaha harus memiliki ketahanan terhadap perubahan zaman dan tidak terpaku pada satu tren semata. Ini merupakan ciri...",o:["Dapat mengantisipasi perubahan, persaingan, dan kebutuhan pasar","Benar-benar sesuai keinginan agar bertahan lama","Dilandasi keyakinan karena masa depan berubah-ubah","Memiliki rasa senang dalam menjalankannya","Sudah teruji melalui riset risiko dan pangsa pasar"],a:0},
+{q:"Berikut yang termasuk contoh risiko teknis dalam berwirausaha adalah...",o:["Perkembangan teknologi membuat produk kuno","Kehilangan reputasi di mata masyarakat","Bencana alam seperti gempa bumi","Kehilangan kesempatan bisnis","Biaya produksi tinggi akibat inefisiensi"],a:4},
+{q:"Risiko akibat produk kurang laku atau menjadi kuno (obsolescence) sehingga penerimaan menurun disebut...",o:["Risiko riil","Risiko pasar","Risiko psikologis","Risiko force majeure","Risiko teknis"],a:1},
+{q:"Risiko yang kemungkinan terjadinya sangat kecil, seperti gempa bumi atau tanah longsor, dikategorikan sebagai...",o:["Risiko riil","Risiko pasar","Risiko psikologis","Risiko Force Majeure","Risiko teknis"],a:3},
+{q:"Risiko yang terlihat, bisa dihitung, diantisipasi, dan dihindari, seperti kehilangan modal, disebut...",o:["Risiko riil","Risiko pasar","Risiko psikologis","Risiko force majeure","Risiko teknis"],a:0},
+{q:"Kehilangan reputasi, rasa percaya diri, dan motivasi merupakan contoh...",o:["Risiko riil","Risiko pasar","Risiko psikologis","Risiko force majeure","Risiko teknis"],a:2},
+{q:"Usaha yang sesuai keinginan dikerjakan dengan senang hati, jika tidak sesuai akan setengah hati. Ini ciri...",o:["Orisinal","Mengantisipasi perubahan","Sudah teruji riset","Dilandasi keyakinan","Benar-benar sesuai keinginan agar bertahan lama"],a:4},
+{q:"Sebelum menekuni usaha, wirausahawan harus melakukan riset risiko dan pangsa pasar agar keyakinannya teruji. Ini ciri...",o:["Orisinal","Sudah teruji melalui riset","Sesuai keinginan","Menghasilkan rasa senang","Mengantisipasi perubahan"],a:1},
+{q:"Tanpa keyakinan, seorang wirausahawan tidak akan mampu...",o:["Menghitung modal awal","Merekrut karyawan","Mencari lokasi usaha","Menghadapi perubahan","Membuat laporan keuangan"],a:3},
+{q:"Keterampilan yang berkaitan dengan proses produksi agar biaya produksi turun (efisien) disebut...",o:["Technological skill","Managerial skill","Organizational skill","Conceptual skill","Analytical skill"],a:0},
+{q:"Kemampuan meramu faktor produksi secara tepat, mencakup sumber daya modal dan tenaga kerja, disebut...",o:["Keterampilan teknis","Kemampuan konseptual","Organizational skill","Kemampuan memimpin","Kemampuan negosiasi"],a:2},
+{q:"Kemampuan memimpin agar tujuan usaha tercapai secara serasi oleh semua orang dalam organisasi disebut...",o:["Technological skill","Financial skill","Marketing skill","Operational skill","Managerial skill"],a:4},
+{q:"Mengadakan inovasi (product innovation) untuk mengantisipasi risiko pasar berarti...",o:["Menurunkan harga drastis","Membuat desain baru produk teknik komputer dan informatika","Memecat karyawan tidak produktif","Mengalihkan kerugian ke asuransi","Menutup usaha"],a:1},
+{q:"Penelitian pasar berkesinambungan memerlukan dana besar dan hanya layak untuk...",o:["Usaha mikro","Usaha kecil","Usaha menengah","Usaha yang besar","Usaha rintisan"],a:3},
+{q:"Kecukupan modal, SDM berkualitas, dan koneksi bisnis banyak dalam SWOT termasuk...",o:["Strength","Weakness","Opportunities","Threats","Strategy"],a:0},
+{q:"Karyawan berpelayanan buruk dan pembayaran tersendat hingga modal timpang, dalam SWOT termasuk...",o:["Strength","Opportunities","Weakness","Threats","Innovation"],a:2},
+{q:"Banyaknya usaha baru sejenis yang mengancam kerja sama dengan pelanggan dalam SWOT termasuk...",o:["Strength","Weakness","Opportunities","Innovation","Threats"],a:4},
+{q:"Permintaan konsumen yang mulai berkurang akibat persaingan wirausaha lain dalam SWOT termasuk...",o:["Strength","Weakness","Opportunities","Threats","Strategy"],a:1},
+{q:"Makna 'Inovatif' sebagai kriteria produk kreatif adalah...",o:["Mampu dipakai di bidang teknik komputer","Dapat dimengerti dan dibuat dengan proses sama","Memiliki nilai estetika tinggi","Produk yang sudah ada dibuat lebih menarik dari sebelumnya","Dibuat dengan biaya sangat rendah"],a:3},
+{q:"Peluang usaha yang bisa menerima pesanan meski jumlahnya hanya satu adalah...",o:["Studio foto","Jasa video shooting","Jasa desainer web","Jasa animasi","Digital printing"],a:4},
+{q:"Tempat usaha yang mudah dicari dan dijangkau konsumen dalam SWOT merupakan...",o:["Strength","Weakness","Opportunities","Threats","Risk"],a:0},
+{q:"Langkah untuk mengetahui prospek usaha dengan riset pasar guna menemukan keinginan dan demografi konsumen disebut...",o:["Analisis kelayakan teknis","Analisis kelayakan finansial","Analisis peluang pasar","Uji coba pasar","Studi kelayakan pasar"],a:2},
+{q:"Langkah untuk mengetahui jenis konsumen yang menyukai produk kreatif yang akan dibuat disebut...",o:["Menentukan segmen pasar","Menentukan jumlah konsumen potensial","Sumber informasi pasar","Uji coba menjual produk","Analisis kelayakan keuangan"],a:0},
+{q:"Teknik riset utama untuk mengurangi risiko dengan membuat karya baru dan melihat respons masyarakat disebut...",o:["Analisis kelayakan teknis","Analisis peluang pasar","Menentukan segmen pasar","Uji coba pasar","Studi kelayakan pasar"],a:3},
+{q:"Analisis kelayakan finansial jangka panjang digunakan untuk aspek...",o:["Alat transportasi harian","Bahan material produk","Gaji karyawan bulanan","Biaya operasional satu bulan","Memperluas dan mempertahankan keutuhan usaha"],a:4},
+{q:"Analisis kelayakan teknis meliputi pembuatan produk kreatif yang dibutuhkan masyarakat, khususnya produk...",o:["Multimedia","Pertanian","Pertambangan","Perikanan","Perkebunan"],a:0},
+{q:"Kebutuhan finansial satu bulan sekali (alat transportasi, alat mencetak, bahan material) termasuk...",o:["Jangka panjang","Jangka menengah","Jangka pendek","Investasi","Spekulatif"],a:2},
+{q:"Tujuan utama studi kelayakan pasar bagi wirausaha baru adalah...",o:["Meningkatkan harga jual drastis","Mengurangi risiko kerugian dan kegagalan usaha","Mengetahui karyawan yang dipecat","Mengalihkan risiko ke asuransi","Meniru pesaing terbesar"],a:1},
+{q:"Banyaknya pembayaran tersendat sehingga ada ketimpangan modal dan keuntungan dalam SWOT adalah...",o:["Strength","Opportunities","Threats","Weakness","Innovation"],a:3},
+{q:"Wirausaha membuka usaha yang tidak ia minati sehingga setengah hati dan gagal. Ini melanggar ciri...",o:["Orisinal","Mengantisipasi perubahan","Sesuai keinginan agar bertahan lama","Teruji riset","Harus ada rasa senang dalam menjalankannya"],a:4},
+{q:"Pemogokan karyawan dan penempatan tenaga kerja kurang tepat sehingga produktivitas turun. Risiko dan solusi tepat...",o:["Risiko pasar; inovasi produk","Risiko teknis; tambah organizational dan managerial skill","Force majeure; alihkan ke asuransi","Psikologis; tingkatkan motivasi","Riil; hitung ulang modal"],a:1},
+{q:"Produk lunak menjadi kuno karena teknologi baru dan revenue menurun. Upaya antisipasi terbaik...",o:["Alihkan ke asuransi","Turunkan kualitas","Inovasi produk dan riset pasar berkesinambungan","Tutup usaha","Salahkan pemerintah"],a:2},
+{q:"Selain menambah keterampilan teknis, strategi yang dibuat agar usaha tetap berkembang dan bertahan disebut...",o:["Mengabaikan keluhan pelanggan","Perencanaan dan desain salah","Menempatkan tenaga kerja acak","Strategi terarah masa depan agar tetap survive","Menghindari metode efisien"],a:3},
+{q:"Desainer kehilangan reputasi, muncul sikap paranoid dan hilang percaya diri. Risikonya adalah...",o:["Teknis","Pasar","Force majeure","Riil","Psikologis"],a:4},
+{q:"Perhitungan alat transportasi, alat mencetak, dan bahan material per bulan termasuk analisis finansial...",o:["Jangka pendek","Jangka menengah","Jangka panjang","Jangka sangat panjang","Investasi"],a:0},
+{q:"Permintaan berkurang akibat persaingan dan karyawan berpelayanan buruk dalam SWOT adalah...",o:["Strength","Weakness","Opportunities","Strategy","Threats"],a:1},
+{q:"Koneksi bisnis yang banyak dan mempermudah pemasaran dalam SWOT merupakan...",o:["Weakness","Threats","Strength","Opportunities","Risk"],a:2},
+{q:"Tujuan utama analisis pesaing adalah...",o:["Mengetahui langkah pengembangan usaha agar tidak lengah","Meniru strategi pesaing","Menjatuhkan reputasi pesaing","Menghindari inovasi","Memonopoli pasar"],a:0},
+{q:"Kualitas produk tinggi, tetapi tempat usaha sulit dijangkau. Dalam SWOT, hal itu adalah...",o:["Strength","Opportunities","Threats","Weakness","Innovation"],a:3},
+{q:"Kehilangan modal dan kesempatan akibat pengalihan gaya bisnis keluarga ke profesional disebut...",o:["Psikologis","Pasar","Force majeure","Teknis","Riil"],a:4},
+{q:"Kemampuan mencapai tujuan usaha secara serasi oleh semua orang dalam organisasi disebut...",o:["Technological skill","Managerial skill","Conceptual skill","Operational skill","Analytical skill"],a:1},
+{q:"Analisis pesaing demi kelanjutan usaha merupakan bagian dari langkah...",o:["Kelayakan teknis","Kelayakan finansial","Membedakan persaingan","Menentukan segmen pasar","Uji coba pasar"],a:2},
+{q:"Menentukan segmentasi pasar bertujuan mengetahui jenis konsumen. Ini bagian dari...",o:["Kelayakan teknis","Kelayakan finansial","Uji coba pasar","Menentukan segmen pasar","Studi kelayakan pasar"],a:3},
+{q:"Contoh risiko force majeure adalah...",o:["Kebakaran karena keteledoran","Pencurian karena pengawasan kurang","Produk kuno akibat teknologi","Kehilangan reputasi","Gempa bumi atau tanah longsor"],a:4},
+{q:"Selain menyesuaikan perkembangan teknologi, inovasi bertujuan untuk...",o:["Memenuhi keinginan dan kebutuhan masyarakat bidang multimedia","Meningkatkan biaya produksi","Mengurangi konsumen potensial","Menghindari komputer","Meniru pesaing"],a:0},
+{q:"Software yang umum digunakan animator 3D untuk menganimasikan objek antar keyframe adalah...",o:["Word dan Excel","3D Studio Max, Maya, atau Blender","Audition dan Pro Tools","Corel Draw dan Illustrator","Notepad dan TextEdit"],a:1},
+{q:"Perbedaan risiko riil dan psikologis adalah...",o:["Riil tak terlihat, psikologis terhitung","Riil hanya usaha besar","Riil terlihat dan terhitung, psikologis tidak terlihat dan tidak terhitung","Riil karena force majeure","Tidak ada perbedaan"],a:2},
+{q:"Fleksibel pada orang berkreativitas tinggi artinya...",o:["Luwes dan mau menerima ide orang lain","Tidak terikat aturan","Bekerja keras","Berpusat pada diri sendiri","Tidak konvensional"],a:0},
+{q:"Kecukupan modal untuk membuat promo dan pemasaran menarik konsumen dalam SWOT adalah...",o:["Weakness","Opportunities","Threats","Strength","Risk"],a:3}
 ];
+const answerKey = questions.map(q => q.a);
 
-const answerKey = [2,0,4,1,3,0,2,4,1,3,0,2,4,1,3,0,2,4,1,3,4,0,2,1,3,4,0,2,1,3,4,1,2,3,4,0,1,2,3,4,4,1,2,3,4,0,1,2,3,4];
-
-// ============ STATE ============
+/* ================= STATE ================= */
 let currentSection = 'login';
 let timerInterval = null;
 
-// ============ ANTI-COPY ============
-document.addEventListener('copy', e => { e.preventDefault(); });
-document.addEventListener('cut', e => { e.preventDefault(); });
-document.addEventListener('paste', e => { e.preventDefault(); });
-document.addEventListener('selectstart', e => { e.preventDefault(); });
-document.addEventListener('dragstart', e => { e.preventDefault(); });
+/* ================= ANTI COPY ================= */
+['copy','cut','paste','dragstart'].forEach(ev =>
+  document.addEventListener(ev, e => e.preventDefault()));
+document.addEventListener('selectstart', e => {
+  if (!e.target.matches('input, textarea')) e.preventDefault();
+});
 
-// ============ ANTI-SCREENSHOT ============
-function addViolation(reason) {
-  if (currentSection !== 'exam') return;
-  const violations = parseInt(localStorage.getItem('exam_violations') || '0');
-  const newCount = violations + 1;
-  localStorage.setItem('exam_violations', newCount);
-  document.getElementById('violationCount').textContent = newCount;
-  document.getElementById('warningCount').textContent = newCount;
+/* ================= ANTI SCREENSHOT ================= */
+function addViolation(reason){
+  if(currentSection !== 'exam') return;
+  const n = parseInt(localStorage.getItem('exam_violations') || '0') + 1;
+  localStorage.setItem('exam_violations', n);
+  const vc = document.getElementById('violationCount');
+  if(vc) vc.textContent = n;
+  document.getElementById('warningCount').textContent = n;
   document.getElementById('warningText').textContent = reason;
   document.getElementById('warningOverlay').classList.add('active');
-  
-  if (newCount >= MAX_VIOLATIONS) {
-    setTimeout(() => {
+  if(n >= MAX_VIOLATIONS){
+    setTimeout(()=>{
       document.getElementById('warningOverlay').classList.remove('active');
       submitExam(true);
-    }, 2000);
+    }, 1800);
   }
 }
-
-document.getElementById('warningOverlay').addEventListener('click', () => {
-  document.getElementById('warningOverlay').classList.remove('active');
+document.getElementById('warningOverlay').addEventListener('click', function(){
+  this.classList.remove('active');
 });
 
 document.addEventListener('keydown', e => {
-  if (currentSection !== 'exam') return;
-  if (e.key === 'PrintScreen' || e.keyCode === 44) {
-    e.preventDefault();
-    addViolation('Tombol PrintScreen terdeteksi!');
-  }
-  if ((e.key === 'S' || e.key === 's') && e.shiftKey && (e.metaKey || e.ctrlKey)) {
-    e.preventDefault();
-    addViolation('Snipping Tool terdeteksi!');
-  }
-  if (e.key === 'p' && e.ctrlKey) {
-    e.preventDefault();
-    addViolation('Tombol Print terdeteksi!');
-  }
-  if (e.key === 's' && e.ctrlKey) {
-    e.preventDefault();
-    addViolation('Tombol Save terdeteksi!');
-  }
-  if (e.key === 'u' && e.ctrlKey) {
-    e.preventDefault();
-    addViolation('View Source terdeteksi!');
-  }
-  if (e.key === 'F12') {
-    e.preventDefault();
-    addViolation('Developer Tools terdeteksi!');
-  }
-  if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
-    e.preventDefault();
-    addViolation('Developer Tools terdeteksi!');
-  }
+  if(currentSection !== 'exam') return;
+  const k = e.key;
+  if(k === 'PrintScreen' || e.keyCode === 44){ e.preventDefault(); addViolation('PrintScreen terdeteksi!'); }
+  if((k==='S'||k==='s') && e.shiftKey && (e.metaKey||e.ctrlKey)){ e.preventDefault(); addViolation('Snipping Tool terdeteksi!'); }
+  if(e.ctrlKey && (k==='p'||k==='s'||k==='u')){ e.preventDefault(); addViolation('Tombol '+k.toUpperCase()+' terdeteksi!'); }
+  if(k==='F12'){ e.preventDefault(); addViolation('DevTools terdeteksi!'); }
+  if(e.ctrlKey && e.shiftKey && ['I','J','C'].includes(k.toUpperCase())){ e.preventDefault(); addViolation('DevTools terdeteksi!'); }
 });
-
-window.addEventListener('blur', () => {
-  if (currentSection === 'exam') {
-    addViolation('Window kehilangan fokus!');
-  }
-});
-
+window.addEventListener('blur', () => { if(currentSection==='exam') addViolation('Window kehilangan fokus!'); });
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden && currentSection === 'exam') {
-    addViolation('Pindah tab terdeteksi!');
-  }
+  if(document.hidden && currentSection==='exam') addViolation('Pindah tab terdeteksi!');
 });
 
-// ============ NAVIGATION ============
-function showSection(section) {
-  currentSection = section;
-  ['login','exam','result','locked','teacherLogin','teacherPanel'].forEach(s => {
-    document.getElementById(s + 'Section').classList.add('hidden');
+/* ================= NAVIGASI (DIPERBAIKI) ================= */
+const SECTIONS = ['loginSection','examSection','resultSection','lockedSection',
+                  'teacherLoginSection','teacherPanelSection'];
+function showSection(id){
+  currentSection = id.replace('Section','');
+  SECTIONS.forEach(s => {
+    const el = document.getElementById(s);
+    if(el) el.classList.add('hidden');
   });
-  document.getElementById(section + 'Section').classList.remove('hidden');
+  const target = document.getElementById(id);
+  if(target) target.classList.remove('hidden');
 }
 
-// ============ START EXAM ============
-function startExam() {
-  const nama = document.getElementById('inputNama').value.trim();
+/* ================= MULAI UJIAN ================= */
+function startExam(){
+  const nama  = document.getElementById('inputNama').value.trim();
   const nomor = document.getElementById('inputNomor').value.trim();
   const kelas = document.getElementById('inputKelas').value.trim();
-  
-  if (!nama || !nomor || !kelas) {
-    alert('Mohon isi semua data dengan lengkap!');
-    return;
-  }
-  
-  if (localStorage.getItem('exam_submitted') === 'true') {
-    showResultPage();
-    return;
-  }
-  
+  if(!nama || !nomor || !kelas){ alert('Mohon isi semua data dengan lengkap!'); return; }
+  if(localStorage.getItem('exam_submitted') === 'true'){ showResultPage(); return; }
+
   localStorage.setItem('student_name', nama);
   localStorage.setItem('student_number', nomor);
   localStorage.setItem('student_class', kelas);
-  
-  if (!localStorage.getItem('exam_start_time')) {
+  if(!localStorage.getItem('exam_start_time'))
     localStorage.setItem('exam_start_time', Date.now().toString());
-  }
-  
-  if (!localStorage.getItem('exam_violations')) {
+  if(!localStorage.getItem('exam_violations'))
     localStorage.setItem('exam_violations', '0');
-  }
-  
-  document.getElementById('dispNama').textContent = nama;
-  document.getElementById('dispNomor').textContent = nomor;
-  document.getElementById('dispKelas').textContent = kelas;
-  document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations');
-  
+
+  fillExamHeader();
   renderQuestions();
-  showSection('exam');
+  showSection('examSection');
   startTimer();
 }
-
-// ============ RENDER QUESTIONS ============
-function renderQuestions() {
-  const container = document.getElementById('questionsContainer');
-  container.innerHTML = '';
-  const savedAnswers = JSON.parse(localStorage.getItem('exam_answers') || '{}');
-  
-  questions.forEach((q, idx) => {
-    const div = document.createElement('div');
-    div.className = 'question';
-    let optionsHtml = '';
-    const letters = ['A','B','C','D','E'];
-    q.o.forEach((opt, i) => {
-      const checked = savedAnswers[idx] === i ? 'checked' : '';
-      const selected = savedAnswers[idx] === i ? 'selected' : '';
-      optionsHtml += `
-        <label class="option ${selected}" onclick="selectOption(this, ${idx}, ${i})">
-          <input type="radio" name="q${idx}" value="${i}" ${checked}>
-          <span><strong>${letters[i]}.</strong> ${opt}</span>
-        </label>
-      `;
-    });
-    div.innerHTML = `
-      <span class="question-number">Soal ${idx + 1}</span>
-      <div class="question-text">${q.q}</div>
-      <div class="options">${optionsHtml}</div>
-    `;
-    container.appendChild(div);
-  });
+function fillExamHeader(){
+  document.getElementById('dispNama').textContent   = localStorage.getItem('student_name') || '-';
+  document.getElementById('dispNomor').textContent  = localStorage.getItem('student_number') || '-';
+  document.getElementById('dispKelas').textContent  = localStorage.getItem('student_class') || '-';
+  document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations') || '0';
 }
 
-function selectOption(el, qIdx, optIdx) {
-  const answers = JSON.parse(localStorage.getItem('exam_answers') || '{}');
-  answers[qIdx] = optIdx;
-  localStorage.setItem('exam_answers', JSON.stringify(answers));
-  const question = el.closest('.question');
-  question.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+/* ================= RENDER SOAL ================= */
+function renderQuestions(){
+  const box = document.getElementById('questionsContainer');
+  box.innerHTML = '';
+  const saved = JSON.parse(localStorage.getItem('exam_answers') || '{}');
+  const L = ['A','B','C','D','E'];
+  questions.forEach((q,i)=>{
+    let opt = '';
+    q.o.forEach((t,j)=>{
+      const c = saved[i] === j;
+      opt += `<label class="option ${c?'selected':''}" onclick="selectOption(this,${i},${j})">
+                <input type="radio" name="q${i}" ${c?'checked':''}>
+                <span><b>${L[j]}.</b> ${t}</span></label>`;
+    });
+    box.insertAdjacentHTML('beforeend',
+      `<div class="question"><span class="question-number">Soal ${i+1}</span>
+       <div class="question-text">${q.q}</div><div class="options">${opt}</div></div>`);
+  });
+}
+function selectOption(el, qi, oi){
+  const a = JSON.parse(localStorage.getItem('exam_answers') || '{}');
+  a[qi] = oi;
+  localStorage.setItem('exam_answers', JSON.stringify(a));
+  el.closest('.question').querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
   el.classList.add('selected');
 }
 
-// ============ TIMER ============
-function startTimer() {
-  const startTime = parseInt(localStorage.getItem('exam_start_time'));
-  
-  function updateTimer() {
-    const now = Date.now();
-    const elapsed = Math.floor((now - startTime) / 1000);
-    const remaining = EXAM_DURATION - elapsed;
-    
-    if (remaining <= 0) {
+/* ================= TIMER (TETAP JALAN SAAT REFRESH) ================= */
+function startTimer(){
+  const start = parseInt(localStorage.getItem('exam_start_time'));
+  function tick(){
+    const rem = EXAM_DURATION - Math.floor((Date.now() - start)/1000);
+    const t = document.getElementById('timerDisplay');
+    if(rem <= 0){
       clearInterval(timerInterval);
-      document.getElementById('timerDisplay').textContent = '00:00';
-      document.getElementById('timerDisplay').classList.remove('warning', 'danger');
+      t.textContent = '00:00'; t.classList.remove('warning','danger');
       document.getElementById('submitBtn').disabled = false;
-      document.getElementById('submitInfo').textContent = '✅ Waktu habis! Silakan kumpulkan jawaban Anda.';
-      document.getElementById('submitInfo').style.color = '#27ae60';
-      document.getElementById('submitInfo').style.fontWeight = 'bold';
+      const info = document.getElementById('submitInfo');
+      info.textContent = '✅ Waktu habis! Silakan kumpulkan jawaban.';
+      info.style.color = '#27ae60'; info.style.fontWeight = 'bold';
       return;
     }
-    
-    const minutes = Math.floor(remaining / 60);
-    const seconds = remaining % 60;
-    const display = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-    const timerEl = document.getElementById('timerDisplay');
-    timerEl.textContent = display;
-    
-    timerEl.classList.remove('warning', 'danger');
-    if (remaining <= 60) timerEl.classList.add('danger');
-    else if (remaining <= 300) timerEl.classList.add('warning');
-    
-    if (remaining > 0) {
-      document.getElementById('submitInfo').textContent = `⏰ Tombol kumpulkan akan aktif dalam ${display}`;
-    }
+    const d = `${String(Math.floor(rem/60)).padStart(2,'0')}:${String(rem%60).padStart(2,'0')}`;
+    t.textContent = d;
+    t.classList.remove('warning','danger');
+    if(rem <= 60) t.classList.add('danger'); else if(rem <= 300) t.classList.add('warning');
+    document.getElementById('submitInfo').textContent = `⏰ Kumpulkan aktif dalam ${d}`;
   }
-  
-  updateTimer();
-  timerInterval = setInterval(updateTimer, 1000);
+  tick();
+  if(timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(tick, 1000);
 }
 
-// ============ SUBMIT EXAM ============
-function submitExam(autoSubmit = false) {
-  if (!autoSubmit) {
-    const startTime = parseInt(localStorage.getItem('exam_start_time'));
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    if (elapsed < EXAM_DURATION) {
-      alert('Anda belum dapat mengumpulkan jawaban sebelum waktu habis!');
-      return;
-    }
-    if (!confirm('Apakah Anda yakin ingin mengumpulkan jawaban?')) return;
+/* ================= KUMPUL ================= */
+function submitExam(auto=false){
+  if(!auto){
+    const el = Math.floor((Date.now() - parseInt(localStorage.getItem('exam_start_time')))/1000);
+    if(el < EXAM_DURATION){ alert('Belum bisa dikumpulkan sebelum waktu habis!'); return; }
+    if(!confirm('Yakin ingin mengumpulkan jawaban?')) return;
   }
-  
-  const answers = JSON.parse(localStorage.getItem('exam_answers') || '{}');
-  let correct = 0;
-  for (let i = 0; i < questions.length; i++) {
-    if (parseInt(answers[i]) === answerKey[i]) correct++;
-  }
-  
-  const score = Math.round((correct / questions.length) * 100);
-  const violations = localStorage.getItem('exam_violations') || '0';
-  
-  localStorage.setItem('exam_submitted', 'true');
-  localStorage.setItem('exam_score', score);
-  localStorage.setItem('exam_correct', correct);
-  
-  if (timerInterval) clearInterval(timerInterval);
-  
+  const a = JSON.parse(localStorage.getItem('exam_answers') || '{}');
+  let c = 0;
+  for(let i=0;i<questions.length;i++) if(parseInt(a[i]) === answerKey[i]) c++;
+  localStorage.setItem('exam_submitted','true');
+  localStorage.setItem('exam_score', Math.round(c/questions.length*100));
+  localStorage.setItem('exam_correct', c);
+  if(timerInterval) clearInterval(timerInterval);
   showResultPage();
 }
-
-// ============ SHOW RESULT PAGE ============
-function showResultPage() {
-  const score = localStorage.getItem('exam_score') || 0;
-  const correct = localStorage.getItem('exam_correct') || 0;
-  const violations = localStorage.getItem('exam_violations') || '0';
-  
-  document.getElementById('finalScore').textContent = score;
-  document.getElementById('resNama').textContent = localStorage.getItem('student_name') || '-';
-  document.getElementById('resNomor').textContent = localStorage.getItem('student_number') || '-';
-  document.getElementById('resKelas').textContent = localStorage.getItem('student_class') || '-';
-  document.getElementById('resCorrect').textContent = correct;
-  document.getElementById('resViolations').textContent = violations;
-  
-  showSection('result');
+function showResultPage(){
+  document.getElementById('finalScore').textContent  = localStorage.getItem('exam_score') || 0;
+  document.getElementById('resNama').textContent     = localStorage.getItem('student_name') || '-';
+  document.getElementById('resNomor').textContent    = localStorage.getItem('student_number') || '-';
+  document.getElementById('resKelas').textContent    = localStorage.getItem('student_class') || '-';
+  document.getElementById('resCorrect').textContent = localStorage.getItem('exam_correct') || 0;
+  document.getElementById('resViolations').textContent = localStorage.getItem('exam_violations') || '0';
+  showSection('resultSection');
 }
 
-// ============ RESET CONFIRM (INLINE DI HALAMAN HASIL) ============
-function showResetConfirm() {
-  document.getElementById('resetConfirmBox').classList.remove('hidden');
-  document.getElementById('resetPassword').focus();
-}
-
-function hideResetConfirm() {
-  document.getElementById('resetConfirmBox').classList.add('hidden');
+/* ================= 🔑 MODAL RESET (FIX) ================= */
+function showResetConfirm(){
+  document.getElementById('resetError').textContent = '';
   document.getElementById('resetPassword').value = '';
+  document.getElementById('resetModal').classList.add('active');
+  setTimeout(()=>document.getElementById('resetPassword').focus(), 100);
 }
-
-function confirmReset() {
+function hideResetConfirm(){
+  document.getElementById('resetModal').classList.remove('active');
+}
+function confirmReset(){
   const pwd = document.getElementById('resetPassword').value;
-  if (pwd === TEACHER_PASSWORD) {
-    if (confirm('⚠️ PERHATIAN!\n\nAnda akan mereset ujian siswa ini.\nSemua data (jawaban, waktu, pelanggaran, nilai) akan dihapus.\n\nLanjutkan reset?')) {
-      executeReset();
-    }
-  } else {
-    alert('❌ Password guru salah!');
+  if(pwd !== TEACHER_PASSWORD){
+    document.getElementById('resetError').textContent = '❌ Password salah!';
     document.getElementById('resetPassword').value = '';
     document.getElementById('resetPassword').focus();
+    return;
   }
-}
-
-function executeReset() {
-  localStorage.removeItem('student_name');
-  localStorage.removeItem('student_number');
-  localStorage.removeItem('student_class');
-  localStorage.removeItem('exam_start_time');
-  localStorage.removeItem('exam_answers');
-  localStorage.removeItem('exam_violations');
-  localStorage.removeItem('exam_submitted');
-  localStorage.removeItem('exam_score');
-  localStorage.removeItem('exam_correct');
-  
-  document.getElementById('inputNama').value = '';
-  document.getElementById('inputNomor').value = '';
-  document.getElementById('inputKelas').value = '';
-  document.getElementById('resetPassword').value = '';
-  document.getElementById('resetConfirmBox').classList.add('hidden');
-  
-  alert('✅ Ujian berhasil direset!\n\nSiswa sekarang dapat mengerjakan ujian kembali.');
-  showSection('login');
-}
-
-// ============ TEACHER MODE ============
-function openTeacherLogin() {
-  showSection('teacherLogin');
-}
-
-function backFromTeacher() {
-  if (localStorage.getItem('exam_submitted') === 'true') {
-    showResultPage();
-  } else if (localStorage.getItem('exam_start_time')) {
-    document.getElementById('dispNama').textContent = localStorage.getItem('student_name');
-    document.getElementById('dispNomor').textContent = localStorage.getItem('student_number');
-    document.getElementById('dispKelas').textContent = localStorage.getItem('student_class');
-    document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations') || '0';
-    renderQuestions();
-    showSection('exam');
-    startTimer();
-  } else {
-    showSection('login');
-  }
-}
-
-function teacherLogin() {
-  const pwd = document.getElementById('teacherPassword').value;
-  if (pwd === TEACHER_PASSWORD) {
-    document.getElementById('teacherPassword').value = '';
-    
-    const submitted = localStorage.getItem('exam_submitted') === 'true';
-    const violations = localStorage.getItem('exam_violations') || '0';
-    const nama = localStorage.getItem('student_name') || '-';
-    const nomor = localStorage.getItem('student_number') || '-';
-    const kelas = localStorage.getItem('student_class') || '-';
-    const score = localStorage.getItem('exam_score') || '0';
-    
-    document.getElementById('teacherStatus').textContent = submitted ? 
-      `✅ SUDAH DIKUMPULKAN` : 
-      (localStorage.getItem('exam_start_time') ? '🔄 SEDANG BERLANGSUNG' : '⏳ BELUM DIMULAI');
-    document.getElementById('teacherNama').textContent = nama;
-    document.getElementById('teacherNomor').textContent = nomor;
-    document.getElementById('teacherKelas').textContent = kelas;
-    document.getElementById('teacherScore').textContent = score;
-    document.getElementById('teacherViolations').textContent = violations;
-    
-    showSection('teacherPanel');
-  } else {
-    alert('❌ Password salah!');
-  }
-}
-
-function exitTeacher() {
-  if (localStorage.getItem('exam_submitted') === 'true') {
-    showResultPage();
-  } else if (localStorage.getItem('exam_start_time')) {
-    document.getElementById('dispNama').textContent = localStorage.getItem('student_name');
-    document.getElementById('dispNomor').textContent = localStorage.getItem('student_number');
-    document.getElementById('dispKelas').textContent = localStorage.getItem('student_class');
-    document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations') || '0';
-    renderQuestions();
-    showSection('exam');
-    startTimer();
-  } else {
-    showSection('login');
-  }
-}
-
-function resetExam() {
-  if (!confirm('⚠️ RESET UJIAN?\n\nSemua data siswa (jawaban, waktu, pelanggaran, nilai) akan dihapus.\nSiswa dapat mengerjakan ulang.\n\nLanjutkan?')) return;
+  if(!confirm('RESET UJIAN?\nSemua data siswa akan dihapus.')) return;
   executeReset();
 }
+function executeReset(){
+  ['student_name','student_number','student_class','exam_start_time','exam_answers',
+   'exam_violations','exam_submitted','exam_score','exam_correct']
+   .forEach(k => localStorage.removeItem(k));
+  if(timerInterval) clearInterval(timerInterval);
+  ['inputNama','inputNomor','inputKelas'].forEach(id => document.getElementById(id).value='');
+  hideResetConfirm();
+  alert('✅ Ujian berhasil direset! Siswa dapat mengerjakan kembali.');
+  showSection('loginSection');
+}
 
-// ============ INIT ============
-window.addEventListener('load', () => {
-  if (localStorage.getItem('exam_submitted') === 'true') {
-    showResultPage();
-  } else if (localStorage.getItem('exam_start_time')) {
-    const startTime = parseInt(localStorage.getItem('exam_start_time'));
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    
-    document.getElementById('dispNama').textContent = localStorage.getItem('student_name');
-    document.getElementById('dispNomor').textContent = localStorage.getItem('student_number');
-    document.getElementById('dispKelas').textContent = localStorage.getItem('student_class');
-    document.getElementById('violationCount').textContent = localStorage.getItem('exam_violations') || '0';
-    renderQuestions();
-    showSection('exam');
-    
-    if (elapsed >= EXAM_DURATION) {
-      document.getElementById('timerDisplay').textContent = '00:00';
-      document.getElementById('submitBtn').disabled = false;
-      document.getElementById('submitInfo').textContent = '✅ Waktu habis! Silakan kumpulkan jawaban Anda.';
-      document.getElementById('submitInfo').style.color = '#27ae60';
-      document.getElementById('submitInfo').style.fontWeight = 'bold';
-    } else {
-      startTimer();
-    }
-  } else {
-    showSection('login');
+/* ================= GURU ================= */
+function openTeacherLogin(){ showSection('teacherLoginSection'); }
+function backFromTeacher(){ resumeAfterTeacher(); }
+function exitTeacher(){ resumeAfterTeacher(); }
+function resumeAfterTeacher(){
+  if(localStorage.getItem('exam_submitted') === 'true') showResultPage();
+  else if(localStorage.getItem('exam_start_time')){
+    fillExamHeader(); renderQuestions(); showSection('examSection'); startTimer();
+  } else showSection('loginSection');
+}
+function teacherLogin(){
+  if(document.getElementById('teacherPassword').value !== TEACHER_PASSWORD){
+    alert('❌ Password salah!'); return;
   }
-});
+  document.getElementById('teacherPassword').value = '';
+  const sub = localStorage.getItem('exam_submitted') === 'true';
+  document.getElementById('teacherStatus').textContent =
+    sub ? '✅ SELESAI' : (localStorage.getItem('exam_start_time') ? '🔄 BERLANGSUNG' : '⏳ BELUM MULAI');
+  document.getElementById('teacherNama').textContent  = localStorage.getItem('student_name') || '-';
+  document.getElementById('teacherNomor').textContent = localStorage.getItem('student_number') || '-';
+  document.getElementById('teacherKelas').textContent = localStorage.getItem('student_class') || '-';
+  document.getElementById('teacherScore').textContent = localStorage.getItem('exam_score') || '0';
+  document.getElementById('teacherViolations').textContent = localStorage.getItem('exam_violations') || '0';
+  showSection('teacherPanelSection');
+}
 
-window.addEventListener('beforeunload', (e) => {
-  if (currentSection === 'exam' && localStorage.getItem('exam_submitted') !== 'true') {
-    e.preventDefault();
-    e.returnValue = 'Ujian sedang berlangsung. Jika Anda refresh, waktu akan tetap berjalan!';
+/* ================= INIT ================= */
+window.addEventListener('load', () => {
+  if(localStorage.getItem('exam_submitted') === 'true'){ showResultPage(); return; }
+  if(localStorage.getItem('exam_start_time')){
+    fillExamHeader(); renderQuestions(); showSection('examSection'); startTimer();
+  } else showSection('loginSection');
+});
+window.addEventListener('beforeunload', e => {
+  if(currentSection === 'exam' && localStorage.getItem('exam_submitted') !== 'true'){
+    e.preventDefault(); e.returnValue = 'Ujian berjalan! Refresh tidak mengulang waktu.';
   }
 });
 </script>
-
 </body>
-</html>
+ </html>
